@@ -5,15 +5,21 @@ import { makeStyles } from '@material-ui/styles';
 import Section from '../../../../components/Section';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
-  Paper,
+  Grid,
   Button,
   TextField,
   Select,
   Tab,
   FormControl,
   Input,
-  IconButton
+  IconButton,
 } from '@material-ui/core';
+import DateFnsUtils from '@date-io/date-fns';
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -67,7 +73,12 @@ const useStyles = makeStyles(theme => ({
     margin: '5px 5px',
     maxWidth: '75%',
   },
-
+  inputTextGrow4: {
+    display: 'flex',
+    flexGrow: '4',
+    margin: '5px 5px',
+    maxWidth: '100%',
+  },
 }));
 
 
@@ -75,6 +86,12 @@ const Local = props => {
   /**STYLES */
   const { className, users, ...rest } = props
   const classes = useStyles()
+  // The first commit of Material-UI
+  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
   return (
     <div className={classes.root}>
 
@@ -108,14 +125,23 @@ const Local = props => {
               label="Nombre empresa"
               variant="outlined"
               color="#f44336"
-              className={classes.inputTextGrow3}
+              className={classes.inputTextGrow4}
+            />
+          </div>
+          <div className={classes.row}>
+            <TextField
+              id="outlined-secondary"
+              label="Código cliente"
+              variant="outlined"
+              color="#f44336"
+              className={classes.inputTextGrow2}
             />
             <TextField
               id="outlined-secondary"
               label="NIF/CIF."
               variant="outlined"
               color="#f44336"
-              className={classes.inputTextGrow1}
+              className={classes.inputTextGrow2}
             />
           </div>
           <div className={classes.row}>
@@ -124,14 +150,7 @@ const Local = props => {
               label="Empresa STP"
               variant="outlined"
               color="#f44336"
-              className={classes.inputTextGrow3}
-            />
-            <TextField
-              id="outlined-secondary"
-              label="Código cliente"
-              variant="outlined"
-              color="#f44336"
-              className={classes.inputTextGrow1}
+              className={classes.inputTextGrow4}
             />
           </div>
           <div className={classes.row}>
@@ -140,22 +159,44 @@ const Local = props => {
               label="Dirección"
               variant="outlined"
               color="#f44336"
-              className={classes.inputTextGrow3}
+              className={classes.inputTextGrow4}
             />
-            <TextField
-              id="outlined-secondary"
-              label="Fecha de visita"
-              variant="outlined"
-              color="#f44336"
-              className={classes.inputTextGrow1}
-            />
-            <TextField
-              id="outlined-secondary"
-              label="Fecha de alta"
-              variant="outlined"
-              color="#f44336"
-              className={classes.inputTextGrow1}
-            />
+          </div>
+          <div className={classes.row}>
+            <MuiPickersUtilsProvider utils={DateFnsUtils} >
+              <Grid container justify="space-around" className={classes.inputTextGrow2}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="outlined"
+                  inputVariant="outlined"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  label="Fecha de visita"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </Grid>
+            </MuiPickersUtilsProvider>
+            <MuiPickersUtilsProvider utils={DateFnsUtils} >
+              <Grid container justify="space-around" className={classes.inputTextGrow2}>
+                <KeyboardDatePicker
+                  disableToolbar
+                  variant="outlined"
+                  inputVariant="outlined"
+                  format="MM/dd/yyyy"
+                  margin="normal"
+                  label="Fecha de alta"
+                  value={selectedDate}
+                  onChange={handleDateChange}
+                  KeyboardButtonProps={{
+                    'aria-label': 'change date',
+                  }}
+                />
+              </Grid>
+            </MuiPickersUtilsProvider>
           </div>
           <div className={classes.row}>
             <TextField
@@ -163,8 +204,10 @@ const Local = props => {
               label="Ciudad"
               variant="outlined"
               color="#f44336"
-              className={classes.inputTextGrow2}
+              className={classes.inputTextGrow4}
             />
+          </div>
+          <div className={classes.row}>
             <TextField
               id="outlined-secondary"
               label="CP"
@@ -177,7 +220,7 @@ const Local = props => {
               label="Provincia"
               variant="outlined"
               color="#f44336"
-              className={classes.inputTextGrow2}
+              className={classes.inputTextGrow3}
             />
           </div>
           <div className={classes.row}>
@@ -186,17 +229,18 @@ const Local = props => {
               label="Teléfono"
               variant="outlined"
               color="#f44336"
-              className={classes.inputTextGrow2}
+              className={classes.inputTextGrow4}
             />
+          </div>
+          <div className={classes.row}>
             <TextField
               id="outlined-secondary"
               label="Email"
               variant="outlined"
               color="#f44336"
-              className={classes.inputTextGrow2}
+              className={classes.inputTextGrow4}
             />
           </div>
-
 
 
         </FormControl>

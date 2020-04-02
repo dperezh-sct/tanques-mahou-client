@@ -134,7 +134,6 @@ const Establecimiento = props => {
               rows="3"
               variant="outlined"
               className={classes.inputTextGrow4}
-
             />
           </div>
 
