@@ -25,11 +25,14 @@ const useStyles = makeStyles(theme => ({
     },
     step: {
         maxWidth: '200px'
+    },
+    sectionContainer: {
+        minWidth: '100%'
     }
 }));
 
 function getSteps() {
-    return ['Datos local', 'Establecimiento'];
+    return ['Datos local', 'Estable- cimiento', 'Tanques', 'Despacho'];
 }
 
 function getStepContent(step) {
@@ -102,7 +105,7 @@ export default function HorizontalNonLinearStepper() {
 
     return (
         <div className={classes.root}>
-            <Stepper nonLinear activeStep={activeStep}>
+            <Stepper alternativeLabel nonLinear activeStep={activeStep}>
                 {steps.map((label, index) => (
                     <Step key={label}>
                         <StepButton
@@ -114,14 +117,16 @@ export default function HorizontalNonLinearStepper() {
                     </Step>
                 ))}
             </Stepper>
-            <div>
+            <div className={classes.sectionContainer}>
                 {allStepsCompleted() ? (
                     <div>
                         <Redirect to='/' />
                     </div>
                 ) : (
-                        <div>
-                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
+                        <div className={classes.sectionContainer}>
+                            <Typography className={classes.instructions}>
+                                {getStepContent(activeStep)}
+                            </Typography>
                             <div>
                                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                     Atrás

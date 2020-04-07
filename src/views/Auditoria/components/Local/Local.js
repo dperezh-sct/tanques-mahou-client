@@ -6,18 +6,13 @@ import Section from '../../../../components/Section';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import {
   Grid,
-  Button,
   TextField,
-  Select,
-  Tab,
   FormControl,
-  Input,
   IconButton,
 } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import {
   MuiPickersUtilsProvider,
-  KeyboardTimePicker,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
 
@@ -78,23 +73,28 @@ const useStyles = makeStyles(theme => ({
     flexGrow: '4',
     margin: '5px 5px',
     maxWidth: '100%',
-  },
+  }
+
 }));
+
 
 
 const Local = props => {
   /**STYLES */
-  const { className, users, ...rest } = props
+  const { className, ...rest } = props
   const classes = useStyles()
   // The first commit of Material-UI
-  const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
-
-  const handleDateChange = (date) => {
+  const [selectedDateVisita, setSelectedDateVisita] = React.useState(new Date('2014-08-18T21:11:54'));
+  const handleDateChangeVisita = (date) => {
     setSelectedDate(date);
   };
+  const [selectedDateAlta, setSelectedDateAlta] = React.useState(new Date('2014-08-18T21:11:54'));
+  const handleDateChangeAlta = (date) => {
+    setSelectedDate(date);
+  };
+
   return (
     <div className={classes.root}>
-
       <Section title='Datos del local'>
         <FormControl variant="outlined" className={classes.formControl}>
           <div className={classes.row}>
@@ -131,7 +131,7 @@ const Local = props => {
           <div className={classes.row}>
             <TextField
               id="outlined-secondary"
-              label="Código cliente"
+              label="Código del cliente"
               variant="outlined"
               color="#f44336"
               className={classes.inputTextGrow2}
@@ -164,38 +164,39 @@ const Local = props => {
           </div>
           <div className={classes.row}>
             <MuiPickersUtilsProvider utils={DateFnsUtils} >
-              <Grid container justify="space-around" className={classes.inputTextGrow2}>
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="outlined"
-                  inputVariant="outlined"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  label="Fecha de visita"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
-              </Grid>
+              <KeyboardDatePicker
+                className={classes.inputTextGrow4}
+                disableToolbar
+                variant="outlined"
+                inputVariant="outlined"
+                format="MM/dd/yyyy"
+                margin="normal"
+                label="Fecha de visita"
+                value={selectedDateVisita}
+                onChange={handleDateChangeVisita}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
             </MuiPickersUtilsProvider>
+          </div>
+          <div className={classes.row}>
             <MuiPickersUtilsProvider utils={DateFnsUtils} >
-              <Grid container justify="space-around" className={classes.inputTextGrow2}>
-                <KeyboardDatePicker
-                  disableToolbar
-                  variant="outlined"
-                  inputVariant="outlined"
-                  format="MM/dd/yyyy"
-                  margin="normal"
-                  label="Fecha de alta"
-                  value={selectedDate}
-                  onChange={handleDateChange}
-                  KeyboardButtonProps={{
-                    'aria-label': 'change date',
-                  }}
-                />
-              </Grid>
+              <KeyboardDatePicker
+                allowKeyboardControl={false}
+                className={classes.inputTextGrow4}
+                disableToolbar
+                variant="outlined"
+                inputVariant="outlined"
+                format="MM/dd/yyyy"
+                margin="normal"
+                label="Fecha de alta"
+                value={selectedDateAlta}
+                onChange={handleDateChangeAlta}
+                KeyboardButtonProps={{
+                  'aria-label': 'change date',
+                }}
+              />
             </MuiPickersUtilsProvider>
           </div>
           <div className={classes.row}>
@@ -241,10 +242,7 @@ const Local = props => {
               className={classes.inputTextGrow4}
             />
           </div>
-
-
         </FormControl>
-
       </Section>
     </div>
   );

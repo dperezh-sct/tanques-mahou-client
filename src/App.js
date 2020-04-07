@@ -23,11 +23,11 @@ export default class App extends Component {
 
         <Router history={browserHistory}>
           <Header />
-          <Route exact path="/" component={Home} />
+          <Route path="/home" component={Home} />
           <Route path="/nueva-auditoria" component={Auditoria} />
           <Route path="/auditorias" component={Auditorias} />
           <Route path="/log-out" component={Logout} />
-          <Route path="/log-in" component={Login} />
+          <Route exact path="/" component={Login} />
         </Router>
       </ThemeProvider>
     );

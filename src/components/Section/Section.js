@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
+  root: { width: '100%' },
   overrides: {
     // Style sheet name ⚛️
     MuiTypography: {

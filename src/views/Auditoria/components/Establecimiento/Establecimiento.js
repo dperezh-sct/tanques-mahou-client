@@ -8,11 +8,15 @@ import Autocomplete from '@material-ui/lab/Autocomplete';
 import {
   TextField,
   FormControl,
-  IconButton
+  IconButton,
+  Select,
+  MenuItem,
+  InputLabel
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
+    width: '100%',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -26,7 +30,8 @@ const useStyles = makeStyles(theme => ({
   row: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'space-between'
+    alignItems: 'space-between',
+    width: '100%'
   },
   column: {
     display: 'flex',
@@ -42,8 +47,12 @@ const useStyles = makeStyles(theme => ({
     margin: '5px 5px'
   },
   buttonPhoto: {
-    alignSelf: 'center',
-    alignSelf: 'flex-end'
+    display: 'flex',
+    flexGrow: '2',
+    margin: '5px 5px',
+    maxWidth: '50%',
+    flexDirection: 'column',
+    alignContent: 'center'
   },
   inputTextGrow1: {
     display: 'flex',
@@ -55,7 +64,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexGrow: '2',
     margin: '5px 5px',
-    maxWidth: '50%',
+    maxWidth: '50%'
   },
   inputTextGrow3: {
     display: 'flex',
@@ -71,40 +80,47 @@ const useStyles = makeStyles(theme => ({
   }
 
 }));
-const ZonaDescargaCargaOptions = [
-  { title: 'SI' },
-  { title: 'NO' },
-];
-const PermisoDescargaCargaOptions = [
-  { title: 'SI' },
-  { title: 'NO' },
-];
-
 const Establecimiento = props => {
   /**STYLES */
   const { className, users, ...rest } = props
   const classes = useStyles()
+  const [permiso, setPermiso] = React.useState('');
+  const handleChangePermiso = (event) => {
+    setPermiso(event.target.value);
+  };
+  const [zona, setZona] = React.useState('');
+  const handleChangeZona = (event) => {
+    setZona(event.target.value);
+  };
+
   return (
     <div className={classes.root}>
-
       <Section title='Establecimiento'>
         <FormControl variant="outlined" className={classes.formControl}>
+
           <div className={classes.row}>
             <div className={classes.inputTextGrow4}>Zona de carga y descarga</div>
           </div>
           <div className={classes.row}>
-            <Autocomplete
-              options={ZonaDescargaCargaOptions}
-              getOptionLabel={option => option.title}
+            <FormControl
+              variant="outlined"
               className={classes.inputTextGrow2}
-              renderInput={params =>
-                <TextField {...params} label="Zona" variant="outlined" />
-              }
-            />
+            >
+              <InputLabel>Zona</InputLabel>
+              <Select
+                value={zona}
+                onChange={handleChangeZona}
+                label="Zona"
+              >
+                <MenuItem value={'SI'}>SI</MenuItem>
+                <MenuItem value={'NO'}>NO</MenuItem>
+              </Select>
+            </FormControl>
+
             <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
             <label
               htmlFor="icon-button-file"
-              className={classes.inputTextGrow2}>
+              className={classes.buttonPhoto}>
               <IconButton
                 color="primary"
                 aria-label="upload picture"
@@ -114,16 +130,20 @@ const Establecimiento = props => {
                 <PhotoCamera />
               </IconButton>
             </label>
-            <Autocomplete
-              options={PermisoDescargaCargaOptions}
-              getOptionLabel={option => option.title}
+            <FormControl
+              variant="outlined"
               className={classes.inputTextGrow2}
-              renderInput={params =>
-                <TextField {...params} label="Permiso" variant="outlined" />
-              }
-            />
-          </div>
-          <div className={classes.row}>
+            >
+              <InputLabel>Permiso</InputLabel>
+              <Select
+                value={permiso}
+                onChange={handleChangePermiso}
+                label="Permiso"
+              >
+                <MenuItem value={'SI'}>SI</MenuItem>
+                <MenuItem value={'NO'}>NO</MenuItem>
+              </Select>
+            </FormControl>
 
           </div>
           <div className={classes.row}>
@@ -136,9 +156,41 @@ const Establecimiento = props => {
               className={classes.inputTextGrow4}
             />
           </div>
-
+          <div className={classes.row}>
+            <TextField
+              id="outlined-multiline-static"
+              label="Distancia (m)"
+              variant="outlined"
+              className={classes.inputTextGrow4}
+            />
+          </div>
+          <div className={classes.row}>
+            <TextField
+              id="outlined-multiline-static"
+              label="Observaciones (Especificar otro)"
+              multiline
+              rows="3"
+              variant="outlined"
+              className={classes.inputTextGrow4}
+            />
+          </div>
+          <div className={classes.row}>
+            <TextField
+              id="outlined-multiline-static"
+              label="Metros de desnivel de camión a tanques"
+              variant="outlined"
+              className={classes.inputTextGrow4}
+            />
+          </div>
+          <div className={classes.row}>
+            <TextField
+              id="outlined-multiline-static"
+              label="Metros de desnivel de tanques a barra"
+              variant="outlined"
+              className={classes.inputTextGrow4}
+            />
+          </div>
         </FormControl>
-
       </Section>
     </div>
   );
