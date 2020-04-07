@@ -26,8 +26,20 @@ const useStyles = makeStyles(theme => ({
     step: {
         maxWidth: '200px'
     },
-    sectionContainer: {
+    sectionContainerBox: {
         minWidth: '100%'
+    },
+    buttonsBox: {
+        minWidth: '100%',
+        margin: '18px 0px',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    saveMessage: {
+        width: '100%',
+        textAlign: 'center'
     }
 }));
 
@@ -45,6 +57,20 @@ function getStepContent(step) {
             return 'Tanques';
         case 3:
             return 'Despacho';
+        default:
+            return 'Unknown step';
+    }
+}
+function getStepName(step) {
+    switch (step) {
+        case 0:
+            return 'local';
+        case 1:
+            return 'estacionamiento';
+        case 2:
+            return 'tanques';
+        case 3:
+            return 'despacho';
         default:
             return 'Unknown step';
     }
@@ -120,17 +146,17 @@ export default function HorizontalNonLinearStepper() {
             <div className={classes.sectionContainer}>
                 {allStepsCompleted() ? (
                     <div>
-                        <Redirect to='/' />
+                        <Redirect to='/auditorias' />
                     </div>
                 ) : (
                         <div className={classes.sectionContainer}>
                             <Typography className={classes.instructions}>
                                 {getStepContent(activeStep)}
                             </Typography>
-                            <div>
+                            <div className={classes.buttonsBox}>
                                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                     Atrás
-              </Button>
+                                </Button>
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -138,17 +164,26 @@ export default function HorizontalNonLinearStepper() {
                                     className={classes.button}
                                 >
                                     Siguiente
-              </Button>
+                                </Button>
+
                                 {activeStep !== steps.length &&
                                     (completed[activeStep] ? (
-                                        <Typography variant="caption" className={classes.completed}>
-                                            Sección {activeStep + 1} enviada
+                                        <div>
+                                            <Typography variant="caption" className={classes.completed}>
+                                                Sección de {getStepName(activeStep)} enviada
                                         </Typography>
-                                    ) : (
-                                            <Button variant="contained" color="primary" onClick={handleComplete}>
-                                                {completedSteps() === totalSteps() - 1 ? 'Completar' : 'Enviar paso '}
+                                            <Button variant="contained" color="primary" disabled>
+                                                Enviar paso
                                             </Button>
+                                        </div>
+                                    ) : (
+                                            <div>
+                                                <Button variant="contained" color="primary" onClick={handleComplete}>
+                                                    {completedSteps() === totalSteps() - 1 ? 'Completar' : 'Enviar paso '}
+                                                </Button>
+                                            </div>
                                         ))}
+
                             </div>
                         </div>
                     )}
