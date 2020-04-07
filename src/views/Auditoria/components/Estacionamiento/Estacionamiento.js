@@ -30,8 +30,9 @@ const useStyles = makeStyles(theme => ({
   row: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'space-between',
-    width: '100%'
+    justifyContent: 'space-between',
+    width: '100%',
+    alignContent: 'center'
   },
   column: {
     display: 'flex',
@@ -48,11 +49,10 @@ const useStyles = makeStyles(theme => ({
   },
   buttonPhoto: {
     display: 'flex',
-    flexGrow: '2',
-    margin: '5px 5px',
-    maxWidth: '50%',
     flexDirection: 'column',
-    alignContent: 'center'
+    alignContent: 'center',
+    justifyContent: 'center',
+    margin: '10px 10px',
   },
   inputTextGrow1: {
     display: 'flex',
@@ -76,8 +76,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexGrow: '4',
     margin: '5px 5px',
-    maxWidth: '100%',
-  }
+    width: '100%',
+  },
 
 }));
 const Estacionamiento = props => {
@@ -91,6 +91,10 @@ const Estacionamiento = props => {
   const [zona, setZona] = React.useState('');
   const handleChangeZona = (event) => {
     setZona(event.target.value);
+  };
+  const [acceso, setAcceso] = React.useState('');
+  const handleChangeAcceso = (event) => {
+    setAcceso(event.target.value);
   };
 
   return (
@@ -139,6 +143,7 @@ const Estacionamiento = props => {
                 value={permiso}
                 onChange={handleChangePermiso}
                 label="Permiso"
+                className={classes.selectInput}
               >
                 <MenuItem value={'SI'}>SI</MenuItem>
                 <MenuItem value={'NO'}>NO</MenuItem>
@@ -163,6 +168,39 @@ const Estacionamiento = props => {
               variant="outlined"
               className={classes.inputTextGrow4}
             />
+          </div>
+          <div className={classes.row}>
+            <FormControl
+              variant="outlined"
+              className={classes.inputTextGrow4}
+            >
+              <InputLabel>Acceso con manguera</InputLabel>
+              <Select
+                value={acceso}
+                onChange={handleChangeAcceso}
+                label="Acceso con manguera"
+              >
+                <MenuItem value={'PP'}>Puerta principal</MenuItem>
+                <MenuItem value={'PA'}>Puerta en almacén</MenuItem>
+                <MenuItem value={'R'}>Registro</MenuItem>
+                <MenuItem value={'O'}>Otro</MenuItem>
+              </Select>
+            </FormControl>
+
+
+            <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
+            <label
+              htmlFor="icon-button-file"
+              className={classes.buttonPhoto}>
+              <IconButton
+                color="primary"
+                aria-label="upload picture"
+                component="span"
+                className={classes.inputTextNoGrow}
+              >
+                <PhotoCamera />
+              </IconButton>
+            </label>
           </div>
           <div className={classes.row}>
             <TextField
