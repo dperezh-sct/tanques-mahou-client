@@ -86,11 +86,11 @@ const Local = props => {
   // The first commit of Material-UI
   const [selectedDateVisita, setSelectedDateVisita] = React.useState(new Date('2014-08-18T21:11:54'));
   const handleDateChangeVisita = (date) => {
-    setSelectedDate(date);
+    setSelectedDateVisita(date);
   };
   const [selectedDateAlta, setSelectedDateAlta] = React.useState(new Date('2014-08-18T21:11:54'));
   const handleDateChangeAlta = (date) => {
-    setSelectedDate(date);
+    setSelectedDateAlta(date);
   };
 
   return (
