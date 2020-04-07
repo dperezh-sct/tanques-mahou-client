@@ -80,7 +80,7 @@ const useStyles = makeStyles(theme => ({
   }
 
 }));
-const Establecimiento = props => {
+const Estacionamiento = props => {
   /**STYLES */
   const { className, users, ...rest } = props
   const classes = useStyles()
@@ -95,7 +95,7 @@ const Establecimiento = props => {
 
   return (
     <div className={classes.root}>
-      <Section title='Establecimiento'>
+      <Section title='Estacionamiento'>
         <FormControl variant="outlined" className={classes.formControl}>
 
           <div className={classes.row}>
@@ -196,8 +196,8 @@ const Establecimiento = props => {
   );
 };
 
-Establecimiento.propTypes = {
+Estacionamiento.propTypes = {
   history: PropTypes.object
 };
 
-export default Establecimiento;
+export default Estacionamiento;

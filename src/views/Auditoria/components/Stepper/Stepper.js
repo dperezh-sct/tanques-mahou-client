@@ -7,7 +7,7 @@ import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Local from '../Local';
-import Establecimiento from '../Establecimiento';
+import Estacionamiento from '../Estacionamiento';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function getSteps() {
-    return ['Datos local', 'Estable- cimiento', 'Tanques', 'Despacho'];
+    return ['Datos local', 'Estacio- namiento', 'Tanques', 'Despacho'];
 }
 
 function getStepContent(step) {
@@ -40,7 +40,7 @@ function getStepContent(step) {
         case 0:
             return <Local />;
         case 1:
-            return <Establecimiento />;
+            return <Estacionamiento />;
         case 2:
             return 'Tanques';
         case 3:
