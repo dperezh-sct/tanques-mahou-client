@@ -4,10 +4,6 @@ import { NavLink as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
-import ListItem from '@material-ui/core/ListItem';
 import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import HomeIcon from '@material-ui/icons/Home';
 import ListAltIcon from '@material-ui/icons/ListAlt';
@@ -15,7 +11,15 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import { ProfileNav } from './components';
 
+import {
+    Button,
+    List,
+    Divider,
+    ListItem,
+    Avatar
+} from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -126,6 +130,7 @@ export default function SwipeableTemporaryDrawer() {
                     onClick={toggleDrawer(false)}
                     onKeyDown={toggleDrawer(false)}
                 >
+                    <ProfileNav />
                     <List>
                         {pages.map(page => (
                             <ListItem
