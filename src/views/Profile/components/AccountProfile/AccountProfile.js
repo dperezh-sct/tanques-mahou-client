@@ -44,7 +44,7 @@ const AccountProfile = props => {
         city: 'Madrid',
         country: 'España',
         timezone: 'GTM-9',
-        avatar: '/images/avatars/avatar_7.png'
+        avatar: '/images/avatar_7.png'
     };
 
     return (

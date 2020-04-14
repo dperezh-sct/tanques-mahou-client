@@ -98,6 +98,7 @@ const ProfileNav = props => {
                         <Avatar
                             alt="Remy Sharp"
                             className={classes.large}
+                            src='/images/avatar_7.png'
                         />
                     </Button>
                     <Typography className={classes.title}>

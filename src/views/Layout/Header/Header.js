@@ -26,7 +26,7 @@ const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.primary.contrastText,
-        minHeight: '40px',
+        minHeight: '50px',
     },
     list: {
         width: 250,
@@ -64,6 +64,15 @@ const useStyles = makeStyles(theme => ({
     },
     colapseIcon: {
         color: theme.palette.white,
+    },
+    centerBox: {
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    NavButton: {
+        minHeight: '100%'
     }
 }));
 
@@ -118,7 +127,12 @@ export default function SwipeableTemporaryDrawer() {
 
     return (
         <div className={classes.root}>
-            <Button onClick={toggleDrawer(true)}><MenuIcon className={classes.colapseIcon} /></Button>
+            <Button
+                className={classes.NavButton}
+                onClick={toggleDrawer(true)}
+            >
+                <MenuIcon className={classes.colapseIcon} />
+            </Button>
             <SwipeableDrawer
                 anchor={'left'}
                 open={state}
