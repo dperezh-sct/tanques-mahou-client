@@ -10,6 +10,7 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
+import PersonIcon from '@material-ui/icons/Person';
 import VpnKeyIcon from '@material-ui/icons/VpnKey';
 import { ProfileNav } from './components';
 
@@ -74,6 +75,11 @@ const pages = [
         icon: <HomeIcon />
     },
     {
+        title: 'Perfil',
+        href: '/profile',
+        icon: <PersonIcon />
+    },
+    {
         title: 'Auditorias',
         href: '/auditorias',
         icon: <ListAltIcon />
@@ -82,11 +88,6 @@ const pages = [
         title: 'Nueva auditoria',
         href: '/nueva-auditoria',
         icon: <AddCircleOutlineIcon />
-    },
-    {
-        title: 'Iniciar sesión',
-        href: '/',
-        icon: <VpnKeyIcon />
     },
     {
         title: 'Cerrar sesion',

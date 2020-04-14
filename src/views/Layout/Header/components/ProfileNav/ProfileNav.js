@@ -35,7 +35,7 @@ const useStyles = makeStyles(theme => ({
         margin: '0px 10px',
     },
     media: {
-        width: '100%'
+        width: '50%'
     },
     avatar: {
         radioButton: '50px',
@@ -47,9 +47,16 @@ const useStyles = makeStyles(theme => ({
         width: theme.spacing(7),
         height: theme.spacing(7),
     },
+    title: {
+        fontSize: '14px',
+    },
     email: {
-        margin: '10px 10px',
-    }
+        marginBottom: '10px',
+    },
+    name: {
+        fontSize: '20px',
+        fontWeight: 'bold'
+    },
 }));
 
 const CustomRouterLink = forwardRef((props, ref) => (
@@ -93,6 +100,12 @@ const ProfileNav = props => {
                             className={classes.large}
                         />
                     </Button>
+                    <Typography className={classes.title}>
+                        Técnico
+                    </Typography>
+                    <Typography className={classes.name}>
+                        Carlos Martinez
+                    </Typography>
                     <Typography className={classes.email}>
                         useremail@email.es
                     </Typography>
