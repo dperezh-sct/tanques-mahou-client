@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
 import { makeStyles } from '@material-ui/styles';
+import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
+import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import {
     Card,
     CardActions,
@@ -11,7 +13,8 @@ import {
     Typography,
     Divider,
     Button,
-    LinearProgress
+    LinearProgress,
+    Chip
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -20,7 +23,17 @@ const useStyles = makeStyles(theme => ({
         margin: '10px 0px'
     },
     details: {
-        display: 'flex'
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'no-wrap',
+        justifyContent: 'space-between'
+    },
+    info: {
+        display: 'flex',
+        flexDirection: 'column'
+    },
+    state: {
+
     },
     avatar: {
         marginLeft: 'auto',
@@ -47,7 +60,7 @@ const AuditoriaCard = props => {
         >
             <CardContent>
                 <div className={classes.details}>
-                    <div>
+                    <div className={classes.info}>
                         <Typography
                             gutterBottom
                         >
@@ -66,8 +79,22 @@ const AuditoriaCard = props => {
                             variant="body1"
                         >
                             {moment().format('hh:mm A')} ({props.timezone})
-            </Typography>
+                            </Typography>
+
                     </div>
+                    {props.state == 'finish' ? (
+                        <Chip
+                            icon={<CheckBoxIcon />}
+                            label="Auditoria finalizada"
+                            color="neutral"
+                        />
+                    ) : (
+                            <Chip
+                                icon={<CheckBoxOutlineBlankIcon />}
+                                label="Auditoria por aprobar"
+                                color="neutral"
+                            />
+                        )}
                 </div>
             </CardContent>
         </Card>
