@@ -5,6 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import Section from '../../../../components/Section';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Camera from '../Camera';
 import {
   TextField,
   FormControl,
@@ -30,9 +31,8 @@ const useStyles = makeStyles(theme => ({
   row: {
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    alignContent: 'center'
+    alignItems: 'space-between',
+    justifyContent: 'center'
   },
   column: {
     display: 'flex',
@@ -102,15 +102,13 @@ const Estacionamiento = props => {
       <Section title='Estacionamiento'>
         <FormControl variant="outlined" className={classes.formControl}>
 
-          <div className={classes.row}>
-            <div className={classes.inputTextGrow4}>Zona de carga y descarga</div>
-          </div>
+
           <div className={classes.row}>
             <FormControl
               variant="outlined"
-              className={classes.inputTextGrow2}
+              className={classes.inputTextGrow4}
             >
-              <InputLabel>Zona</InputLabel>
+              <InputLabel>Zona de carga y descarga</InputLabel>
               <Select
                 value={zona}
                 onChange={handleChangeZona}
@@ -121,24 +119,13 @@ const Estacionamiento = props => {
               </Select>
             </FormControl>
 
-            <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
-            <label
-              htmlFor="icon-button-file"
-              className={classes.buttonPhoto}>
-              <IconButton
-                color="primary"
-                aria-label="upload picture"
-                component="span"
-                className={classes.inputTextNoGrow}
-              >
-                <PhotoCamera />
-              </IconButton>
-            </label>
+          </div>
+          <div className={classes.row}>
             <FormControl
               variant="outlined"
-              className={classes.inputTextGrow2}
+              className={classes.inputTextGrow4}
             >
-              <InputLabel>Permiso</InputLabel>
+              <InputLabel>Permiso de carga y descarga</InputLabel>
               <Select
                 value={permiso}
                 onChange={handleChangePermiso}
@@ -149,7 +136,9 @@ const Estacionamiento = props => {
                 <MenuItem value={'NO'}>NO</MenuItem>
               </Select>
             </FormControl>
-
+          </div>
+          <div className={classes.row}>
+            <Camera name='Foto de zona de carga y descarga' />
           </div>
           <div className={classes.row}>
             <TextField
@@ -188,19 +177,9 @@ const Estacionamiento = props => {
             </FormControl>
 
 
-            <input accept="image/*" className={classes.input} id="icon-button-file" type="file" />
-            <label
-              htmlFor="icon-button-file"
-              className={classes.buttonPhoto}>
-              <IconButton
-                color="primary"
-                aria-label="upload picture"
-                component="span"
-                className={classes.inputTextNoGrow}
-              >
-                <PhotoCamera />
-              </IconButton>
-            </label>
+          </div>
+          <div className={classes.row}>
+            <Camera name='Foto de acceso con manguera' />
           </div>
           <div className={classes.row}>
             <TextField
