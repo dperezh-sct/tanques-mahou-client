@@ -32,7 +32,8 @@ const useStyles = makeStyles(theme => ({
   row: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'space-between'
+    alignItems: 'space-between',
+    justifyContent: 'center'
   },
   column: {
     display: 'flex',
@@ -119,30 +120,18 @@ const Local = props => {
     <div className={classes.root}>
       <Section title='Datos del local'>
         <FormControl variant="outlined" className={classes.formControl}>
-          <div className={classes.row}>
-            <Camera />
-          </div>
+
           <div className={classes.row}>
             <TextField
               id="outlined-secondary"
               label="Nombre establecimiento"
               variant="outlined"
               color="#f44336"
-              className={classes.inputTextGrow3}
+              className={classes.inputTextGrow4}
             />
-            <input id="photo1" accept="image/*" className={classes.input} id="icon-button-file" type="file" />
-            <label
-              htmlFor="icon-button-file"
-              className={classes.inputTextGrow1}>
-              <IconButton
-                color="primary"
-                aria-label="upload picture"
-                component="span"
-                className={classes.inputTextNoGrow}
-              >
-                <PhotoCamera />
-              </IconButton>
-            </label>
+          </div>
+          <div className={classes.row}>
+            <Camera name='Foto del local' />
           </div>
           <div className={classes.row}>
             <TextField

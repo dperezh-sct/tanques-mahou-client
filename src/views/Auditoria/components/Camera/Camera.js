@@ -10,6 +10,7 @@ import {
     TextField,
     FormControl,
     IconButton,
+    Typography,
 } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -21,18 +22,17 @@ const useStyles = makeStyles(theme => ({
     root: {
         border: '1px solid grey',
         borderRadius: '5px',
+        padding: '10px 10px',
+        margin: '5px 5px',
+        width: '97%',
+        flexWrap: 'wrap',
+    },
+    content: {
         display: 'flex',
         flexDirection: 'row',
-        padding: '10px 10px',
         justifyContent: 'space-between',
         alignItems: 'center',
         flexGrow: '4',
-        margin: '5px 5px',
-        maxWidth: '100%',
-        flexWrap: 'wrap',
-        "&:active": {
-            border: '1.4px solid red'
-        },
     },
     input: {
         display: 'flex',
@@ -64,15 +64,25 @@ const Camera = props => {
     }
     return (
         <div className={classes.root}>
-            <input
-                id="photo1"
-                accept="image/*"
-                type="file"
-                onChange={(event) => handleChange(event)}
-                label='foto'
-                className={classes.input}
-            />
-            <img className={classes.preview} src={file} />
+            <Typography
+                variant='h6'
+                className={classes.title}
+            >
+                {props.name}
+            </Typography>
+
+            <div className={classes.content}>
+                <input
+                    id="photo1"
+                    accept="image/*"
+                    type="file"
+                    onChange={(event) => handleChange(event)}
+                    label='foto'
+                    className={classes.input}
+                />
+                <img className={classes.preview} src={file} />
+            </div>
+
         </div>
     );
 };
