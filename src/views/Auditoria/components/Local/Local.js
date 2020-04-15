@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import Section from '../../../../components/Section';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
+import Camera from '../Camera';
 import {
   Grid,
   TextField,
@@ -118,6 +119,9 @@ const Local = props => {
     <div className={classes.root}>
       <Section title='Datos del local'>
         <FormControl variant="outlined" className={classes.formControl}>
+          <div className={classes.row}>
+            <Camera />
+          </div>
           <div className={classes.row}>
             <TextField
               id="outlined-secondary"

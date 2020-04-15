@@ -109,8 +109,9 @@ const Auditorias = props => {
           xl={4}
           xs={12}
         >
-          {auditorias.map((auditoria, idx) => (
-            <div className={classes.auditsContainer}>
+          {auditorias.map((auditoria) => (
+            <div className={classes.auditsContainer}
+              key={auditorias.indexOf(auditoria)}>
               <AuditoriaCard
                 name={auditoria.name}
                 city={auditoria.city}

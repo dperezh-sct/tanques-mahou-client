@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import moment from 'moment';
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles, useTheme } from '@material-ui/styles';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
 import EditIcon from '@material-ui/icons/Edit';
@@ -57,6 +57,7 @@ const useStyles = makeStyles(theme => ({
 const AuditoriaCard = props => {
     const { className, ...rest } = props;
     const classes = useStyles();
+    const theme = useTheme();
 
     return (
         <Card
@@ -89,7 +90,6 @@ const AuditoriaCard = props => {
                     {props.state == 'finish' ? (
                         <Chip
                             label="Finalizada"
-                            color="neutral"
                         />
                     ) : (
                             <div className={classes.state}>
@@ -97,7 +97,7 @@ const AuditoriaCard = props => {
                                     label="Pendiente"
                                     color="secondary"
                                 />
-                                <Button disabled={!props.feedback}><EditIcon />{props.feedback}</Button>
+                                <Button disabled={!props.feedback}><EditIcon /></Button>
                             </div>
 
 
