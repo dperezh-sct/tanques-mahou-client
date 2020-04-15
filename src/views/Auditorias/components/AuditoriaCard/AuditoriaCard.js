@@ -5,6 +5,8 @@ import moment from 'moment';
 import { makeStyles } from '@material-ui/styles';
 import CheckBoxOutlineBlankIcon from '@material-ui/icons/CheckBoxOutlineBlank';
 import CheckBoxIcon from '@material-ui/icons/CheckBox';
+import EditIcon from '@material-ui/icons/Edit';
+
 import {
     Card,
     CardActions,
@@ -33,7 +35,9 @@ const useStyles = makeStyles(theme => ({
         flexDirection: 'column'
     },
     state: {
-
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'space-around'
     },
     avatar: {
         marginLeft: 'auto',
@@ -84,16 +88,19 @@ const AuditoriaCard = props => {
                     </div>
                     {props.state == 'finish' ? (
                         <Chip
-                            icon={<CheckBoxIcon />}
-                            label="Auditoria finalizada"
+                            label="Finalizada"
                             color="neutral"
                         />
                     ) : (
-                            <Chip
-                                icon={<CheckBoxOutlineBlankIcon />}
-                                label="Auditoria por aprobar"
-                                color="neutral"
-                            />
+                            <div className={classes.state}>
+                                <Chip
+                                    label="Pendiente"
+                                    color="secondary"
+                                />
+                                <Button disabled={!props.feedback}><EditIcon />{props.feedback}</Button>
+                            </div>
+
+
                         )}
                 </div>
             </CardContent>

@@ -30,56 +30,64 @@ const auditorias = [
     city: 'Madrid',
     country: 'España',
     timezone: 'GTM-9',
-    state: 'pending'
+    state: 'pending',
+    feedback: true
   },
   {
     name: 'Establecimiento 1',
     city: 'Madrid',
     country: 'España',
     timezone: 'GTM-9',
-    state: 'pending'
+    state: 'pending',
+    feedback: false
   },
   {
     name: 'Establecimiento 1',
     city: 'Madrid',
     country: 'España',
     timezone: 'GTM-9',
-    state: 'finish'
+    state: 'finish',
+    feedback: false
   },
   {
     name: 'Establecimiento 1',
     city: 'Madrid',
     country: 'España',
     timezone: 'GTM-9',
-    state: 'finish'
+    state: 'finish',
+    feedback: false
   },
   {
     name: 'Establecimiento 1',
     city: 'Madrid',
     country: 'España',
     timezone: 'GTM-9',
-    state: 'finish'
+    state: 'finish',
+    feedback: false
   },
   {
     name: 'Establecimiento 1',
     city: 'Madrid',
     country: 'España',
     timezone: 'GTM-9',
-    state: 'finish'
+    state: 'finish',
+    feedback: false
   },
   {
     name: 'Establecimiento 1',
     city: 'Madrid',
     country: 'España',
     timezone: 'GTM-9',
-    state: 'finish'
+    state: 'finish',
+    feedback: false
   },
   {
     name: 'Establecimiento 1',
     city: 'Madrid',
     country: 'España',
     timezone: 'GTM-9',
-    state: 'finish'
+    state: 'finish',
+    feedback: false
   },
 ];
 
@@ -109,6 +117,7 @@ const Auditorias = props => {
                 country={auditoria.country}
                 timezone={auditoria.timezone}
                 state={auditoria.state}
+                feedback={auditoria.feedback}
               />
             </div>
           ))}
