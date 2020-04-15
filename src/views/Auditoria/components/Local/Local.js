@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import Section from '../../../../components/Section';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import Camera from '../Camera';
+import Camera from '../../../../components/Camera';
 import {
   Grid,
   TextField,
@@ -95,27 +95,6 @@ const Local = props => {
     setSelectedDateAlta(date);
   };
 
-  /*const seleccionArchivos = document.querySelector("#seleccionArchivos");
-  const photo1 = document.querySelector("#imagenPrevisualizacion");
-  // Escuchar cuando cambie
-  seleccionArchivos.addEventListener("change", () => {
-    // Los archivos seleccionados, pueden ser muchos o uno
-    const archivos = $seleccionArchivos.files;
-    // Si no hay archivos salimos de la función y quitamos la imagen
-    if (!archivos || !archivos.length) {
-      photo1.src = "";
-      return;
-    }
-    // Ahora tomamos el primer archivo, el cual vamos a previsualizar
-    const primerArchivo = archivos[0];
-    // Lo convertimos a un objeto de tipo objectURL
-    const objectURL = URL.createObjectURL(primerArchivo);
-    // Y a la fuente de la imagen le ponemos el objectURL
-    photo1.src = objectURL;
-  });
-  
-          <img id="photo1" />
-*/
   return (
     <div className={classes.root}>
       <Section title='Datos del local'>

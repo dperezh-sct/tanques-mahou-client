@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Local from '../Local';
 import Estacionamiento from '../Estacionamiento';
 import Tanques from '../Tanques';
+import Despacho from '../Despacho';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -55,9 +56,9 @@ function getStepContent(step) {
         case 1:
             return <Estacionamiento />;
         case 2:
-            return <Tanques/>;
+            return <Tanques />;
         case 3:
-            return 'Despacho';
+            return <Despacho />;
         default:
             return 'Unknown step';
     }

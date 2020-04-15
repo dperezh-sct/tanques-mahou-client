@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/styles';
 import Section from '../../../../components/Section';
 import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Autocomplete from '@material-ui/lab/Autocomplete';
-import Camera from '../Camera';
+import Camera from '../../../../components/Camera';
 import {
   TextField,
   FormControl,
