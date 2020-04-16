@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { Camera, Section } from '../../../../../../components';
+import { Camera } from '../../../../../../components';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
@@ -20,18 +19,7 @@ import {
     Card,
     CardHeader,
     CardContent,
-    Dialog,
-    DialogTitle,
-    DialogContent,
-    DialogContentText,
-    DialogActions,
-    Button
 } from '@material-ui/core';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -246,37 +234,39 @@ const Modulo = props => {
     /**STYLES */
     const { className, ...rest } = props;
     const classes = useStyles();
-    const [moduls, setModuls] = React.useState([]);
-    const [codigo, setCodigo] = React.useState('');
+
+
+    const [codigo, setCodigo] = useState('');
     const handleChangeCodigo = (event) => {
         setCodigo(event.target.value);
     };
-    const [acabado, setAcabado] = React.useState('');
+    const [acabado, setAcabado] = useState('');
     const handleChangeAcabado = (event) => {
         setAcabado(event.target.value);
     };
-    const [open, setOpen] = React.useState(false);
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-    const handleClose = () => {
-        setOpen(false);
-    };
-    const handleAdd = (event) => {
-        console.log('xd');
-        console.log(moduls)
-        let temp = [];
-        temp = moduls;
-        temp.push(event.target.value);
-        console.log('temp')
-        console.log(temp)
-        setModuls(temp);
-        handleClose();
+    const [moduls, setModuls] = useState([0]);
+    const handleAdd = () => {
+        let newmoduls = [...moduls]
+        let init = [0];
+        if (newmoduls.length == 0) {
+            newmoduls = [...init];
+        } else {
+            newmoduls.push((newmoduls[newmoduls.length - 1]) + 1)
+        }
+        setModuls(newmoduls);
+    }
+    const handleDelete = (id) => {
+        let temp = [...moduls]
+        let newmoduls = []
+        newmoduls = temp.filter(e => {
+            return e != id
+        })
+        setModuls(newmoduls);
     }
 
     useEffect(() => {
-        console.log(moduls)
-    }, [moduls])
+    }, [moduls]);
+
     return (
         <div>
             <Card className={classes.card}>
@@ -293,7 +283,7 @@ const Modulo = props => {
                             <IconButton
                                 aria-label="delete"
                                 className={classes.add}
-                                onClick={handleClickOpen}>
+                                onClick={() => handleAdd()}>
                                 <AddCircleIcon />
                             </IconButton>
                         </div>
@@ -301,7 +291,7 @@ const Modulo = props => {
                     } />
                 <CardContent>
                     {moduls.map((mod) => (
-                        <ExpansionPanel key={mod}>
+                        <ExpansionPanel key={moduls.indexOf(mod)}>
                             <ExpansionPanelSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel1a-content"
@@ -310,13 +300,16 @@ const Modulo = props => {
                                 <div className={classes.rowCenter}>
                                     <IconButton
                                         aria-label="delete"
-                                        className={classes.delete}>
+                                        className={classes.delete}
+                                        onClick={(event) => { event.stopPropagation(), handleDelete(mod) }}
+                                        onFocus={(event) => event.stopPropagation()}
+                                    >
                                         <DeleteIcon fontSize="small" />
                                     </IconButton>
                                     <Typography
                                         align='center'
                                         className={classes.headingModul}>
-                                        Modulo
+                                        Modulo {"" + mod}
                                     </Typography>
                                 </div>
                             </ExpansionPanelSummary>
@@ -326,8 +319,10 @@ const Modulo = props => {
                                     <div className={classes.row}>
 
                                         <TextField
+                                            disabled={true}
                                             id="outlined-secondary"
                                             label="Id"
+                                            value={mod}
                                             variant="outlined"
                                             color="#f44336"
                                             className={classes.inputTextGrow1}
@@ -406,32 +401,6 @@ const Modulo = props => {
                 </CardContent>
             </Card>
 
-            <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-                <DialogTitle id="form-dialog-title">Subscribe</DialogTitle>
-                <DialogContent>
-                    <DialogContentText>
-                        Para añadir un nuevo modulo, digite el identificador(Id)
-          </DialogContentText>
-                    <form >
-                        <TextField
-                            autoFocus
-                            margin="dense"
-                            id="name"
-                            label="Email Address"
-                            type="email"
-                            fullWidth
-                        />
-                        <Button type='submit' color="primary" onClick={(event) => handleAdd(event)}>
-                            Agregar
-                        </Button>
-                    </form>
-
-
-                    <Button onClick={handleClose} color="primary">
-                        Cancelar
-          </Button>
-                </DialogContent>
-            </Dialog>
         </div>
     );
 };

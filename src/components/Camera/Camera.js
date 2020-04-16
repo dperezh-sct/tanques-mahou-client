@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexDirection: 'row',
         flexWrap: 'wrap',
-        maxWidth: '50%'
+        maxWidth: '70%'
     },
     preview: {
         width: '50px',
