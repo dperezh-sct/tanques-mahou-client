@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import Section from '../../../../components/Section';
-import { Modulo, Enfriador } from './components';
+import { Modulo } from './components';
 import {
     Paper
 } from '@material-ui/core';

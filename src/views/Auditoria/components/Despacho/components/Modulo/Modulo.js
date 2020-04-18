@@ -5,20 +5,17 @@ import { Camera } from '../../../../../../components';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { Productos, Enfriadores } from './components';
 import {
     ExpansionPanel,
     ExpansionPanelSummary,
     ExpansionPanelDetails,
     Typography,
-    FormControl,
-    TextField,
-    Select,
-    MenuItem,
-    InputLabel,
     IconButton,
     Card,
     CardHeader,
     CardContent,
+    Divider
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -130,120 +127,18 @@ const useStyles = makeStyles(theme => ({
     add: {
         color: theme.palette.success.main,
         fontSize: '20px'
+    },
+    subHeader: {
+        marginBottom: '10px'
     }
 
 }));
-
-const acabados = [
-    'INOX',
-    'COBRE',
-    'COBRE ENVEJECIDO',
-    'LATÓN',
-    'BLANCO',
-    'GRAFITO',
-    'DORADA',
-    'BLANCO',
-    'ROJO']
-const codigos = ['99 AGUA / GRANEL SIN MARCA',
-    'B6 ALHAMBRA ESP.',
-    'D8 ALHAMBRA PREMIUM LAGER',
-    'N7 ALHAMBRA RADLER',
-    'E5 ALHAMBRA ROJA',
-    'B4 ALHAMBRA SIN',
-    'H0 ALL DAY IPA',
-    'A4 BLACKTHORN',
-    '17 BLANCHE DE BRUGES',
-    'R1 BUDWEISER',
-    'C2 CARLING',
-    '34 CARLSBERG',
-    'H4 DIRTY BASTARD',
-    "05 FOSTER'S",
-    'H5 FOUNDERS',
-    'R6 FRANZISKANER NATURTRÜB',
-    'N4 GRIMBERGEN BELGIAN PALE ALE',
-    '15 GRIMBERGEN DOUBLE',
-    'C1 GUINESS',
-    'H9 HANAMI',
-    'R7 HOEGAARDEN',
-    'G6 HONG KONG TAP STATION',
-    'C7 KONIG LUDWIG',
-    '03 KRONENBOURG',
-    'N8 LA MEZQUITA',
-    'N2 LA SALVE BOTXO',
-    'S1 LA SALVE LAGER AUTENTICA',
-    'S2 LA SALVE MUNICH',
-    'S4 LA SALVE NEGRA',
-    'S3 LA SALVE ORIGINAL',
-    'S5 LA SALVE SEASONAL',
-    'S7 LA SALVE SIRIMIRI GERMAN ALE',
-    'S9 LA SALVE SIRIMIRI PIKA',
-    'S8 LA SALVE TXIRENE',
-    'R3 LEFFE BLONDE',
-    'R4 LEFFE BRUNE',
-    'R5 LEFFE ROSSE',
-    'N5 MAGNA',
-    'N9 MAHOU 0, 0 TOSTADA',
-    '30 MAHOU 5 ESTRELLAS',
-    '31 MAHOU CLASICA',
-    'N1 MAHOU DUNKEL',
-    'N6 MAHOU IPA 5E',
-    '27 MAHOU MAESTRA',
-    '33 MAHOU NEGRA',
-    '26 MAHOU RADLER',
-    '32 MAHOU SIN',
-    '20 NEWCASTLE BROWN',
-    'I0 NOMADA',
-    'H8 PASSIFLORA',
-    'H7 PETRICOR',
-    'H3 PORTER',
-    '40 REINA',
-    '01 SAN MIGUEL',
-    '19 SAN MIGUEL 0,0',
-    '41 SAN MIGUEL RADLER',
-    '02 SAN MIGUEL SELECTA',
-    'A8 SARANGO LIMON',
-    'B3 SARANGO SANGRIA',
-    'B1 SIDRA GAYMER ORIGINAL',
-    'B2 SIDRA GAYMER PEAR',
-    '22 SM 1516',
-    'F9 SM AMSTERDAM TAP STATION',
-    'G1 SM BARCELONA TAP STATION',
-    'F2 SM BERLIN TAP STATION',
-    'G3 SM BILBAO TAP STATION',
-    'G4 SM BURGOS TAP STATION',
-    'F8 SM CHICAGO TAP STATION',
-    'F3 SM HALLERTAU TAP STATION',
-    'F7 SM HAMBURGO TAP STATION',
-    'F0 SM LEON TAP STATION',
-    'G5 SM LLEIDA TAP STATION',
-    'F6 SM LONDRES TAP STATION',
-    'G2 SM MALAGA TAP STATION',
-    'F5 SM PRAGA TAP STATION',
-    'F1 SM TAP STATION',
-    'G7 SM TOKIO TAP STATION',
-    'R2 STELLA ARTOIS',
-    'E6 TANQUE ALHAMBRA',
-    '29 TANQUE MAHOU',
-    '25 TANQUE MAHOU 5 ESTRELLAS',
-    '13 TANQUE SAN MIGUEL',
-    "A7 TETLEY'S",
-    'V2 VERMUT MSM',
-    '94 WARSTEINER']
 
 const Modulo = props => {
     /**STYLES */
     const { className, ...rest } = props;
     const classes = useStyles();
 
-
-    const [codigo, setCodigo] = useState('');
-    const handleChangeCodigo = (event) => {
-        setCodigo(event.target.value);
-    };
-    const [acabado, setAcabado] = useState('');
-    const handleChangeAcabado = (event) => {
-        setAcabado(event.target.value);
-    };
     const [moduls, setModuls] = useState([0]);
     const handleAdd = () => {
         let newmoduls = [...moduls]
@@ -289,117 +184,54 @@ const Modulo = props => {
                         </div>
 
                     } />
-                <CardContent>
-                    {moduls.map((mod) => (
-                        <ExpansionPanel key={moduls.indexOf(mod)}>
-                            <ExpansionPanelSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <div className={classes.rowCenter}>
-                                    <IconButton
-                                        aria-label="delete"
-                                        className={classes.delete}
-                                        onClick={(event) => { event.stopPropagation(), handleDelete(mod) }}
-                                        onFocus={(event) => event.stopPropagation()}
-                                    >
-                                        <DeleteIcon fontSize="small" />
-                                    </IconButton>
-                                    <Typography
-                                        align='center'
-                                        className={classes.headingModul}>
-                                        Modulo {"" + mod}
-                                    </Typography>
-                                </div>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-
-                                <div className={classes.root}>
-                                    <div className={classes.row}>
-
-                                        <TextField
-                                            disabled={true}
-                                            id="outlined-secondary"
-                                            label="Id"
-                                            value={mod}
-                                            variant="outlined"
-                                            color="#f44336"
-                                            className={classes.inputTextGrow1}
-                                        />
-                                        <FormControl
-                                            variant="outlined"
-                                            className={classes.inputTextGrow3}
-                                        >
-                                            <InputLabel>Código de producto</InputLabel>
-                                            <Select
-                                                value={codigo}
-                                                onChange={handleChangeCodigo}
-                                                label="Codigo de producto"
-                                            >
-                                                {codigos.map((cod) => (
-                                                    <MenuItem
-                                                        key={cod.indexOf(cod)}
-                                                        value={cod}
-                                                    >
-                                                        {cod}
-                                                    </MenuItem>
-                                                ))}
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-                                    <div className={classes.row}>
-                                        <TextField
-                                            id="outlined-secondary"
-                                            label="Modelo de la columna"
-                                            variant="outlined"
-                                            color="#f44336"
-                                            className={classes.inputTextGrow4}
-                                        />
-                                    </div>
-                                    <div className={classes.row}>
-                                        <FormControl
-                                            variant="outlined"
-                                            className={classes.inputTextGrow4}
-                                        >
-                                            <InputLabel>Acabado</InputLabel>
-                                            <Select
-                                                value={acabado}
-                                                onChange={handleChangeAcabado}
-                                                label="Acabado"
-                                            >
-                                                {acabados.map((acabado) => (
-                                                    <MenuItem
-                                                        key={acabados.indexOf(acabado)}
-                                                        value={acabado}
-                                                    >
-                                                        {acabado}
-                                                    </MenuItem>
-                                                ))}
-                                            </Select>
-                                        </FormControl>
-                                    </div>
-                                    <div className={classes.row}>
-                                        <Camera name='Foto de FRONTAL EXTERIOR' />
-                                    </div>
-                                    <div className={classes.row}>
-                                        <Camera name='Foto de LATERAL IZQUIERDO EXTERIOR' />
-                                    </div>
-                                    <div className={classes.row}>
-                                        <Camera name='Foto de LATERAL DERECHO EXTERIOR' />
-                                    </div>
-                                    <div className={classes.row}>
-                                        <Camera name='Foto de botella CO2' />
-                                    </div>
-
-                                </div >
-                            </ExpansionPanelDetails>
-                        </ExpansionPanel>
-
-
-                    ))}
-                </CardContent>
             </Card>
+            {moduls.map((mod) => (
+                <ExpansionPanel key={moduls.indexOf(mod)}>
+                    <ExpansionPanelSummary
+                        expandIcon={<ExpandMoreIcon />}
+                        aria-controls="panel1a-content"
+                        id="panel1a-header"
+                    >
+                        <div className={classes.rowCenter}>
+                            <IconButton
+                                aria-label="delete"
+                                className={classes.delete}
+                                onClick={(event) => { event.stopPropagation(), handleDelete(mod) }}
+                                onFocus={(event) => event.stopPropagation()}
+                            >
+                                <DeleteIcon fontSize="small" />
+                            </IconButton>
+                            <Typography
+                                align='center'
+                                className={classes.headingModul}>
+                                Modulo {"" + mod}
+                            </Typography>
+                        </div>
+                    </ExpansionPanelSummary>
+                    <ExpansionPanelDetails>
+                        <div className={classes.root}>
+
+                            <Productos />
+                            <Enfriadores id={mod} />
+                            <div className={classes.row}>
+                                <Camera name='Foto de FRONTAL EXTERIOR' />
+                            </div>
+                            <div className={classes.row}>
+                                <Camera name='Foto de LATERAL IZQUIERDO EXTERIOR' />
+                            </div>
+                            <div className={classes.row}>
+                                <Camera name='Foto de LATERAL DERECHO EXTERIOR' />
+                            </div>
+                            <div className={classes.row}>
+                                <Camera name='Foto de botella CO2' />
+                            </div>
+
+                        </div >
+                    </ExpansionPanelDetails>
+                </ExpansionPanel>
+
+
+            ))}
 
         </div>
     );
