@@ -152,9 +152,9 @@ export default function HorizontalNonLinearStepper() {
                     </div>
                 ) : (
                         <div className={classes.sectionContainer}>
-                            <Typography className={classes.instructions}>
+                            <div className={classes.instructions}>
                                 {getStepContent(activeStep)}
-                            </Typography>
+                            </div>
                             <div className={classes.buttonsBox}>
                                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                     Atrás

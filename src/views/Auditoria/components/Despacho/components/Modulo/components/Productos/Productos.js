@@ -135,7 +135,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const acabados = [
+const acabadosOp = [
     'INOX',
     'COBRE',
     'COBRE ENVEJECIDO',
@@ -145,7 +145,7 @@ const acabados = [
     'DORADA',
     'BLANCO',
     'ROJO']
-const codigos = ['99 AGUA / GRANEL SIN MARCA',
+const codigosOp = ['99 AGUA / GRANEL SIN MARCA',
     'B6 ALHAMBRA ESP.',
     'D8 ALHAMBRA PREMIUM LAGER',
     'N7 ALHAMBRA RADLER',
@@ -237,13 +237,17 @@ const Productos = props => {
     const classes = useStyles();
 
 
-    const [codigo, setCodigo] = useState('');
-    const handleChangeCodigo = (event) => {
-        setCodigo(event.target.value);
+    const [codigos, setCodigos] = useState([]);
+    const handleChangeCodigo = (event, id) => {
+        let newcodigos = [...codigos]
+        newcodigos[id] = event.target.value;
+        setCodigos(newcodigos);
     };
-    const [acabado, setAcabado] = useState('');
-    const handleChangeAcabado = (event) => {
-        setAcabado(event.target.value);
+    const [acabados, setAcabados] = useState([]);
+    const handleChangeAcabado = (event, id) => {
+        let newacabados = [...codigos]
+        newacabados[id] = event.target.value;
+        setAcabados(newacabados);
     };
     const [products, setProducts] = useState([0]);
     const handleAdd = () => {
@@ -324,13 +328,13 @@ const Productos = props => {
                                             >
                                                 <InputLabel>Código de producto</InputLabel>
                                                 <Select
-                                                    value={codigo}
-                                                    onChange={handleChangeCodigo}
+                                                    value={codigos[products.indexOf(product)]}
+                                                    onChange={(event) => handleChangeCodigo(event, products.indexOf(product))}
                                                     label="Codigo de producto"
                                                 >
-                                                    {codigos.map((cod) => (
+                                                    {codigosOp.map((cod) => (
                                                         <MenuItem
-                                                            key={cod.indexOf(cod)}
+                                                            key={codigosOp.indexOf(cod)}
                                                             value={cod}
                                                         >
                                                             {cod}
@@ -344,7 +348,7 @@ const Productos = props => {
                                                 id="outlined-secondary"
                                                 label="Modelo de la columna"
                                                 variant="outlined"
-                                                color="#f44336"
+
                                                 className={classes.inputTextGrow4}
                                             />
                                         </div>
@@ -355,13 +359,13 @@ const Productos = props => {
                                             >
                                                 <InputLabel>Acabado</InputLabel>
                                                 <Select
-                                                    value={acabado}
-                                                    onChange={handleChangeAcabado}
+                                                    value={acabados[products.indexOf(product)]}
+                                                    onChange={(event) => handleChangeAcabado(event, products.indexOf(product))}
                                                     label="Acabado"
                                                 >
-                                                    {acabados.map((acabado) => (
+                                                    {acabadosOp.map((acabado) => (
                                                         <MenuItem
-                                                            key={acabados.indexOf(acabado)}
+                                                            key={acabadosOp.indexOf(acabado)}
                                                             value={acabado}
                                                         >
                                                             {acabado}

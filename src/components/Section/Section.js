@@ -40,14 +40,12 @@ const Section = ({ children, title }) => {
   const classes = useStyles()
 
   return (
-    <div className={classes.root}>
-      <Card className={classes.root}>
-        <CardHeader className={classes.header} title={title} />
-        <CardContent>
-          {children}
-        </CardContent>
-      </Card>
-    </div>
+    <Card className={classes.root}>
+      <CardHeader className={classes.header} title={title} />
+      <CardContent>
+        {children}
+      </CardContent>
+    </Card>
   );
 };
 

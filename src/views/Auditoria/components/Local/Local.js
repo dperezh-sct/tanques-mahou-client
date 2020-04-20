@@ -105,7 +105,6 @@ const Local = props => {
               id="outlined-secondary"
               label="Nombre establecimiento"
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow4}
             />
           </div>
@@ -117,7 +116,6 @@ const Local = props => {
               id="outlined-secondary"
               label="Nombre empresa"
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow4}
             />
           </div>
@@ -126,14 +124,12 @@ const Local = props => {
               id="outlined-secondary"
               label="Código del cliente"
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow2}
             />
             <TextField
               id="outlined-secondary"
               label="NIF/CIF."
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow2}
             />
           </div>
@@ -142,7 +138,6 @@ const Local = props => {
               id="outlined-secondary"
               label="Empresa STP"
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow4}
             />
           </div>
@@ -151,7 +146,6 @@ const Local = props => {
               id="outlined-secondary"
               label="Dirección"
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow4}
             />
           </div>
@@ -197,7 +191,6 @@ const Local = props => {
               id="outlined-secondary"
               label="Ciudad"
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow4}
             />
           </div>
@@ -206,14 +199,12 @@ const Local = props => {
               id="outlined-secondary"
               label="CP"
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow1}
             />
             <TextField
               id="outlined-secondary"
               label="Provincia"
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow3}
             />
           </div>
@@ -222,7 +213,6 @@ const Local = props => {
               id="outlined-secondary"
               label="Teléfono"
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow4}
             />
           </div>
@@ -231,7 +221,6 @@ const Local = props => {
               id="outlined-secondary"
               label="Email"
               variant="outlined"
-              color="#f44336"
               className={classes.inputTextGrow4}
             />
           </div>
