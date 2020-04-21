@@ -204,7 +204,7 @@ const Modulo = props => {
                             <Typography
                                 align='center'
                                 className={classes.headingModul}>
-                                Modulo {"" + mod}
+                                Modulo {"" + (mod + 1)}
                             </Typography>
                         </div>
                     </ExpansionPanelSummary>
@@ -213,6 +213,9 @@ const Modulo = props => {
 
                             <Productos />
                             <Enfriadores id={mod} />
+                            <div className={classes.row}>
+                                <Camera name='Foto de enfriadores (Desde adentro)' />
+                            </div>
                             <div className={classes.row}>
                                 <Camera name='Foto de FRONTAL EXTERIOR' />
                             </div>

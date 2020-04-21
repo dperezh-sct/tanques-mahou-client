@@ -315,7 +315,7 @@ const Productos = props => {
                                         <Typography
                                             align='center'
                                             className={classes.headingProduct}>
-                                            Producto {"" + product}
+                                            Producto {"" + (product + 1)}
                                         </Typography>
                                     </div>
                                 </ExpansionPanelSummary>

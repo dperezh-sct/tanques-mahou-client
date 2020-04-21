@@ -136,7 +136,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const modelos = ['V50',
+const modelosOp = ['V50',
     'V75',
     'V100',
     'V200',
@@ -149,9 +149,11 @@ const Enfriadores = props => {
     const { className, ...rest } = props;
     const classes = useStyles();
 
-    const [modelo, setModelo] = useState('');
-    const handleChangeModelo = (event) => {
-        setModelo(event.target.value);
+    const [modelos, setModelos] = useState([]);
+    const handleChangeModelo = (event, id) => {
+        let newmodelos = [...modelos]
+        newmodelos[id] = event.target.value;
+        setModelos(newmodelos);
     };
     const [enfriadores, setEnfriadores] = useState([0]);
     const handleAdd = () => {
@@ -219,7 +221,7 @@ const Enfriadores = props => {
                                         <Typography
                                             align='center'
                                             className={classes.headingProduct}>
-                                            Enfriador {"" + enfriador}
+                                            Enfriador {"" + (enfriador + 1)}
                                         </Typography>
                                     </div>
                                 </ExpansionPanelSummary>
@@ -240,13 +242,13 @@ const Enfriadores = props => {
                                             >
                                                 <InputLabel>Modelo</InputLabel>
                                                 <Select
-                                                    value={modelo}
-                                                    onChange={handleChangeModelo}
+                                                    value={modelos[enfriadores.indexOf(enfriador)]}
+                                                    onChange={(event) => handleChangeModelo(event, enfriadores.indexOf(enfriador))}
                                                     label="Codigo de producto"
                                                 >
-                                                    {modelos.map((mod) => (
+                                                    {modelosOp.map((mod) => (
                                                         <MenuItem
-                                                            key={mod.indexOf(mod)}
+                                                            key={modelosOp.indexOf(mod)}
                                                             value={mod}
                                                         >
                                                             {mod}
@@ -265,9 +267,7 @@ const Enfriadores = props => {
                                                 className={classes.inputTextGrow4}
                                             />
                                         </div>
-                                        <div className={classes.row}>
-                                            <Camera name='Foto de enfriador (Desde adentro)' />
-                                        </div>
+
                                     </div>
                                 </ExpansionPanelDetails>
                             </ExpansionPanel>
