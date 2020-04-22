@@ -4,6 +4,7 @@ import { makeStyles } from '@material-ui/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
+import { Camera } from '../../../../../../components';
 import {
     FormControl,
     TextField,
@@ -320,6 +321,9 @@ const TanquesList = props => {
                                                     ))}
                                                 </Select>
                                             </FormControl>
+                                        </div>
+                                        <div className={classes.row}>
+                                            <Camera name='Foto de tanque' />
                                         </div>
                                         <div className={classes.row}>
                                             <TextField
