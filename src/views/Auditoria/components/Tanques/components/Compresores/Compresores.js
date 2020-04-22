@@ -289,7 +289,7 @@ const Compresores = props => {
                                                 variant="outlined"
                                                 className={classes.inputTextGrow4}
                                             >
-                                                <InputLabel>Modelo de compresor</InputLabel>
+                                                <InputLabel>Certificado</InputLabel>
                                                 <Select
                                                     value={certificados[compresores.indexOf(compresor)]}
                                                     onChange={(event) => handleChangeCertificados(event, compresores.indexOf(compresor))}
