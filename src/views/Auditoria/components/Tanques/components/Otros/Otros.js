@@ -6,10 +6,15 @@ import {
     FormControl,
     TextField,
     Select,
+    Button,
     MenuItem,
     InputLabel,
     Typography,
-    Divider
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    DialogActions
+
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -125,7 +130,18 @@ const useStyles = makeStyles(theme => ({
     add: {
         color: theme.palette.success.main,
         fontSize: '20px'
-    }
+    },
+    inputPhotoGrow1: {
+        display: 'flex',
+        flexGrow: '1',
+        margin: '5px 5px',
+        maxWidth: '50px',
+        maxHeight: '50px',
+        borderRadius: '8px',
+        '&:hover': {
+            cursor: 'pointer'
+        }
+    },
 
 }));
 
@@ -165,6 +181,14 @@ const Otros = props => {
     const handleChangeCertificado = (event) => {
         setCertificado(event.target.value);
     };
+    /**plano */
+    const [open, setOpen] = React.useState(false);
+    const handleShowPlano = () => {
+        setOpen(true);
+    }
+    const handleClose = () => {
+        setOpen(false);
+    }
 
     useEffect(() => {
     }, []);
@@ -304,7 +328,7 @@ const Otros = props => {
                 <div className={classes.row}>
                     <FormControl
                         variant="outlined"
-                        className={classes.inputTextGrow4}
+                        className={classes.inputTextGrow3}
                         disabled
                     >
                         <InputLabel>Certificado</InputLabel>
@@ -324,6 +348,9 @@ const Otros = props => {
                             ))}
                         </Select>
                     </FormControl>
+                    <img
+                        onClick={(event) => handleShowPlano(event)}
+                        className={classes.inputPhotoGrow1} src='/images/Planos_Mahou.png' />
                 </div>
                 <div className={classes.row}>
                     <TextField
@@ -337,7 +364,22 @@ const Otros = props => {
                 </div>
             </div>
 
-
+            <Dialog
+                open={open}
+                onClose={handleClose}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{"Planos de los modelos de tanques"}</DialogTitle>
+                <DialogContent>
+                    <img src='/images/Planos_Mahou.png' />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleClose} color="primary">
+                        Cerrar
+                    </Button>
+                </DialogActions>
+            </Dialog>
         </div >
     );
 };
