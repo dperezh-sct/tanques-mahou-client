@@ -4,7 +4,6 @@ import { makeStyles } from '@material-ui/styles';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
-import { Camera } from '../../../../../../../../components';
 import {
     FormControl,
     TextField,
