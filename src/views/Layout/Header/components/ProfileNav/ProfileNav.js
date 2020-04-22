@@ -12,7 +12,6 @@ const useStyles = makeStyles(theme => ({
     root: {
         width: '100%',
         backgroundColor: theme.palette.background.default,
-        height: '100%',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
