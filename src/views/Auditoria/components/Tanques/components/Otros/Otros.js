@@ -134,7 +134,7 @@ const useStyles = makeStyles(theme => ({
     inputPhotoGrow1: {
         display: 'flex',
         flexGrow: '1',
-        margin: '5px 5px',
+        margin: '8px 8px',
         maxWidth: '50px',
         maxHeight: '50px',
         borderRadius: '8px',
@@ -149,7 +149,18 @@ const situacionOp = ['Visto (zona clientes)', 'No visto'];
 const automaticoOp = ['SI', 'NO'];
 const tipoOp = ['Naumático', 'Electrónico'];
 const alarmaOp = ['SI', 'NO'];
-const estructuraOp = ['SI', 'NO'];
+const estructuraOp = [
+    'Especial',
+    'Estándar horizontal',
+    'Estándar vertical',
+    'Estándar "L"',
+    'Estándar pirámide',
+    'Estándar contrapeado',
+    'Tanques verticales en suelo',
+    'Tanques verticales sobre estructura',
+    'Estándar avanzado',
+    'OTRO (Anotar en observaciones)'
+];
 const certificadoOp = ['SI', 'NO'];
 
 const Otros = props => {
@@ -306,7 +317,7 @@ const Otros = props => {
                 <div className={classes.row}>
                     <FormControl
                         variant="outlined"
-                        className={classes.inputTextGrow4}
+                        className={classes.inputTextGrow3}
                     >
                         <InputLabel>Estructura</InputLabel>
                         <Select
@@ -324,17 +335,20 @@ const Otros = props => {
                             ))}
                         </Select>
                     </FormControl>
+                    <img
+                        onClick={(event) => handleShowPlano(event)}
+                        className={classes.inputPhotoGrow1} src='/images/Planos_Mahou.png' />
                 </div>
                 <div className={classes.row}>
                     <FormControl
                         variant="outlined"
-                        className={classes.inputTextGrow3}
+                        className={classes.inputTextGrow4}
                         disabled
                     >
                         <InputLabel>Certificado</InputLabel>
                         <Select
                             value={certificado}
-                            onChange={(event) => handleChangeEstructura(event)}
+                            onChange={(event) => handleChangeCertificado(event)}
                             label="Estructura"
 
                         >
@@ -348,9 +362,6 @@ const Otros = props => {
                             ))}
                         </Select>
                     </FormControl>
-                    <img
-                        onClick={(event) => handleShowPlano(event)}
-                        className={classes.inputPhotoGrow1} src='/images/Planos_Mahou.png' />
                 </div>
                 <div className={classes.row}>
                     <TextField
