@@ -135,6 +135,7 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
+const categoriasOp = ['1', '2', '3'];
 const acabadosOp = [
     'INOX',
     'COBRE',
@@ -237,6 +238,12 @@ const Productos = props => {
     const classes = useStyles();
 
 
+    const [categorias, setCategorias] = useState([]);
+    const handleChangeCategorias = (event, id) => {
+        let newcategorias = [...categorias]
+        newcategorias[id] = event.target.value;
+        setCategorias(newcategorias);
+    };
     const [codigos, setCodigos] = useState([]);
     const handleChangeCodigo = (event, id) => {
         let newcodigos = [...codigos]
@@ -321,6 +328,28 @@ const Productos = props => {
                                 </ExpansionPanelSummary>
                                 <ExpansionPanelDetails>
                                     <div className={classes.form}>
+                                        <div className={classes.row}>
+                                            <FormControl
+                                                variant="outlined"
+                                                className={classes.inputTextGrow4}
+                                            >
+                                                <InputLabel>Categoría</InputLabel>
+                                                <Select
+                                                    value={categorias[products.indexOf(product)]}
+                                                    onChange={(event) => handleChangeCategorias(event, products.indexOf(product))}
+                                                    label="Categoría"
+                                                >
+                                                    {categoriasOp.map((item) => (
+                                                        <MenuItem
+                                                            key={categoriasOp.indexOf(item)}
+                                                            value={item}
+                                                        >
+                                                            {item}
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
+                                        </div>
                                         <div className={classes.row}>
                                             <FormControl
                                                 variant="outlined"
