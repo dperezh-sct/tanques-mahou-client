@@ -171,8 +171,6 @@ function getGaleryItem(step) {
                 title={galeryNames[step]}
             />
         </Card>);
-
-
 }
 
 const situacionOp = ['Visto (zona clientes)', 'No visto'];
@@ -192,7 +190,7 @@ const estructuraOp = [
     'OTRO (Anotar en observaciones)'
 ];
 const certificadoOp = ['SI', 'NO'];
-const galery = [
+const galery = ['Planos_Mahou.png',
     'estandar_horizontal.png',
     'estandar_vertical.png',
     'estandar_L.png',
@@ -202,7 +200,7 @@ const galery = [
     'vertical_en_suelo.png',
     'vertical_sobre_estructura.png',
     'estandar_avanzada.png'];
-const galeryNames = [
+const galeryNames = ['Plano completo',
     'Estandar horizontal',
     'Estandar vertical',
     'Estandar L',
@@ -469,16 +467,29 @@ const Otros = props => {
                         </div>
                     ) : (
                             <div>
-                                <Button onClick={() => handleChangeCurrentgalery(-1)}>Atrás</Button>
                                 {getGaleryItem(currentgalery)}
                             </div>
                         )}
                 </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                        Cerrar
-                    </Button>
-                </DialogActions>
+                {currentgalery == -1 ? (
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            Cerrar
+                        </Button>
+                    </DialogActions>
+                ) : (
+                        <DialogActions>
+                            <Button onClick={() => handleChangeCurrentgalery(-1)}>
+                                Atrás
+                            </Button>
+                            <Button onClick={handleClose} color="primary">
+                                Cerrar
+                            </Button>
+                        </DialogActions>
+                    )}
+
+
+
             </Dialog>
         </div >
     );
