@@ -13,7 +13,12 @@ import {
     Dialog,
     DialogContent,
     DialogTitle,
-    DialogActions
+    DialogActions,
+    Card,
+    CardActionArea,
+    CardMedia,
+    CardContent,
+    CardActions
 
 } from '@material-ui/core';
 
@@ -142,8 +147,33 @@ const useStyles = makeStyles(theme => ({
             cursor: 'pointer'
         }
     },
+    galeryBox: {
+        display: 'flex',
+        flexDirection: 'row',
+        flexWrap: 'wrap',
+        justifyContent: 'center'
+    },
+    galeryItem: {
+        alignSelf: 'center',
+        maxWidth: '40%',
+        margin: '10px 10px'
+    }
 
 }));
+
+function getGaleryItem(step) {
+    return (
+        <Card >
+            <CardMedia
+                component="img"
+                alt={galeryNames[step]}
+                image={"/images/" + galery[step]}
+                title={galeryNames[step]}
+            />
+        </Card>);
+
+
+}
 
 const situacionOp = ['Visto (zona clientes)', 'No visto'];
 const automaticoOp = ['SI', 'NO'];
@@ -162,12 +192,40 @@ const estructuraOp = [
     'OTRO (Anotar en observaciones)'
 ];
 const certificadoOp = ['SI', 'NO'];
+const galery = [
+    'estandar_horizontal.png',
+    'estandar_vertical.png',
+    'estandar_L.png',
+    'estandar_piramidal.png',
+    'estandar_contrapeada.png',
+    'especial_colgados.png',
+    'vertical_en_suelo.png',
+    'vertical_sobre_estructura.png',
+    'estandar_avanzada.png'];
+const galeryNames = [
+    'Estandar horizontal',
+    'Estandar vertical',
+    'Estandar L',
+    'Estandar piramidal',
+    'Estandar contrapesada',
+    'Especial colgados',
+    'Vertical en suelo',
+    'Vertical sobre estructura',
+    'Estandar avanzada'];
 
 const Otros = props => {
     /**STYLES */
     const { className, ...rest } = props;
     const classes = useStyles();
 
+    const [currentgalery, setCurrentgalery] = useState(-1);
+    const handleChangeCurrentgalery = (input) => {
+        try {
+            setCurrentgalery(input);
+        } catch (error) {
+            this.setState({ error });
+        }
+    };
     const [situacion, setSituacion] = useState([]);
     const handleChangeSituacion = (event) => {
         setSituacion(event.target.value);
@@ -383,7 +441,38 @@ const Otros = props => {
             >
                 <DialogTitle id="alert-dialog-title">{"Planos de los modelos de tanques"}</DialogTitle>
                 <DialogContent>
-                    <img src='/images/Planos_Mahou.png' />
+                    {currentgalery == -1 ? (
+                        <div className={classes.galeryBox}>
+                            {galery.map((image) =>
+                                (<Card
+                                    key={galery.indexOf(image)}
+                                    className={classes.galeryItem}
+                                >
+                                    <CardMedia
+                                        component="img"
+                                        alt=""
+                                        image={"/images/" + image}
+                                        title=""
+                                    />
+                                    <CardContent>
+                                        <Typography gutterBottom variant="h6" >
+                                            {galeryNames[galery.indexOf(image)]}
+                                        </Typography>
+                                    </CardContent>
+                                    <CardActions>
+                                        <Button onClick={() => handleChangeCurrentgalery(galery.indexOf(image))} size="small" color="primary">
+                                            Ver
+                                        </Button>
+                                    </CardActions>
+                                </Card>)
+                            )}
+                        </div>
+                    ) : (
+                            <div>
+                                <Button onClick={() => handleChangeCurrentgalery(-1)}>Atrás</Button>
+                                {getGaleryItem(currentgalery)}
+                            </div>
+                        )}
                 </DialogContent>
                 <DialogActions>
                     <Button onClick={handleClose} color="primary">
