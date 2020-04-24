@@ -23,12 +23,12 @@ export default class App extends Component {
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
           <HeaderView />
-          <Route path="/home" component={HomeView} />
+          <Route path="/login" component={LoginView} />
           <Route path="/nueva-auditoria" component={AuditoriaView} />
           <Route path="/auditorias" component={AuditoriasView} />
-          <Route path="/log-out" component={LogoutView} />
+          <Route path="/logout" component={LogoutView} />
           <Route path="/profile" component={ProfileView} />
-          <Route exact path="/" component={LoginView} />
+          <Route exact path="/" component={HomeView} />
         </Router>
       </ThemeProvider>
     );

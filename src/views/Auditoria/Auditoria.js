@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
+import { Link as RouterLink, withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import Section from '../../components/Section';
@@ -55,7 +55,7 @@ const Auditoria = props => {
 
   return (
     <div className={classes.root}>
-      <Stepper />
+      {localStorage.getItem('key') != null ? (<Stepper />) : (<Redirect to="/login" />)}
     </div>
   );
 };

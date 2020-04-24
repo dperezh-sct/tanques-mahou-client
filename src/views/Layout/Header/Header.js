@@ -80,7 +80,7 @@ const useStyles = makeStyles(theme => ({
 const pages = [
     {
         title: 'Inicio',
-        href: '/home',
+        href: '/',
         icon: <HomeIcon />
     },
     {
@@ -97,12 +97,8 @@ const pages = [
         title: 'Nueva auditoria',
         href: '/nueva-auditoria',
         icon: <AddCircleOutlineIcon />
-    },
-    {
-        title: 'Cerrar sesion',
-        href: '/log-out',
-        icon: <ExitToAppIcon />
     }
+
 ];
 const CustomRouterLink = forwardRef((props, ref) => (
     <div
@@ -164,7 +160,42 @@ export default function SwipeableTemporaryDrawer() {
                                 </Button>
                             </ListItem>
                         ))}
+                        {localStorage.getItem('key') != null ? (
+                            <ListItem
+                                className={classes.item}
+                                disableGutters
+                                key='Cerrar sesion'
+                            >
+                                <Button
+                                    activeClassName={classes.active}
+                                    className={classes.button}
+                                    component={CustomRouterLink}
+                                    to='/logout'
+                                >
+                                    <div className={classes.icon}><ExitToAppIcon /></div>
+                                    Cerrar sesion
+                                </Button>
+                            </ListItem>
+                        ) : (
+                                <ListItem
+                                    className={classes.item}
+                                    disableGutters
+                                    key='Iniciar sesión'
+                                >
+                                    <Button
+                                        className={classes.button}
+                                        component={CustomRouterLink}
+                                        to='/login'
+                                    >
+                                        <div className={classes.icon}><ExitToAppIcon /></div>
+                                Iniciar sesión
+                            </Button>
+                                </ListItem>
+                            )}
+
                     </List>
+
+
                 </div>
             </SwipeableDrawer>
         </div>

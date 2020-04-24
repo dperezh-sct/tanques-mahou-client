@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
 import Section from '../../components/Section';
 import { AuditoriaCard } from './components';
@@ -98,33 +99,34 @@ const Auditorias = props => {
 
   return (
     <div className={classes.root}>
-      <Grid
-        container
-        spacing={4}
-      >
+      {localStorage.getItem('key') != null ? (
+
         <Grid
+          container
+          spacing={4}
+        ><Grid
           item
           lg={4}
           md={6}
           xl={4}
           xs={12}
         >
-          {auditorias.map((auditoria) => (
-            <div className={classes.auditsContainer}
-              key={auditorias.indexOf(auditoria)}>
-              <AuditoriaCard
-                name={auditoria.name}
-                city={auditoria.city}
-                country={auditoria.country}
-                timezone={auditoria.timezone}
-                state={auditoria.state}
-                feedback={auditoria.feedback}
-              />
-            </div>
-          ))}
+            {auditorias.map((auditoria) => (
+              <div className={classes.auditsContainer}
+                key={auditorias.indexOf(auditoria)}>
+                <AuditoriaCard
+                  name={auditoria.name}
+                  city={auditoria.city}
+                  country={auditoria.country}
+                  timezone={auditoria.timezone}
+                  state={auditoria.state}
+                  feedback={auditoria.feedback}
+                />
+              </div>
+            ))}
+          </Grid>
         </Grid>
-
-      </Grid>
+      ) : (<Redirect to="/login" />)}
     </div>
   );
 };

@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import Section from '../../components/Section';
+import { logOut } from '../../services/api';
 import { Redirect } from 'react-router-dom';
 import {
+  Grid,
   CircularProgress
 } from '@material-ui/core';
 
@@ -22,13 +23,30 @@ const useStyles = makeStyles(theme => ({
 const Logout = props => {
   /**STYLES */
   const { className, ...rest } = props
-  const classes = useStyles()
-
+  const classes = useStyles();
   useEffect(() => {
+    console.log('sadsxdd');
+    logOut();
+    localStorage.clear();
     console.log('logout-success');
   }, []);
 
-  return <Redirect to='/' />
+  return (
+    <div >
+      <Grid
+        container
+      >
+        <Grid
+          item
+          lg={12}
+          xs={12}
+        >
+          <CircularProgress />
+          <Redirect to='/' />
+        </Grid>
+      </Grid>
+    </div>
+  );
 
 };
 

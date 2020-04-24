@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext, forwardRef } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { NavLink as RouterLink, Redirect } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -41,26 +41,28 @@ const Home = props => {
   const { className, ...rest } = props
   const classes = useStyles()
 
-  return (
-    <div className={classes.root}>
-      <Button
-        className={classes.menubutton}
-        variant="contained"
-        color="primary"
-        component={CustomRouterLink}
-        to={'/nueva-auditoria'}>
-        Nueva auditoria
+  return (<div>
+    {localStorage.getItem('key') != null ? (
+      <div className={classes.root}>
+        <Button
+          className={classes.menubutton}
+          variant="contained"
+          color="primary"
+          component={CustomRouterLink}
+          to={'/nueva-auditoria'}>
+          Nueva auditoria
       </Button>
-      <Button
-        className={classes.menubutton}
-        variant="contained"
-        color="primary"
-        component={CustomRouterLink}
-        to={'/auditorias'}>
-        Auditorias
+        <Button
+          className={classes.menubutton}
+          variant="contained"
+          color="primary"
+          component={CustomRouterLink}
+          to={'/auditorias'}>
+          Auditorias
       </Button>
+      </div>) : (<Redirect to="/login" />)}
 
-    </div>
+  </div>
   );
 };
 

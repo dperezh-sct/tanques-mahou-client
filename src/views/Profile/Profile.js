@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import { Redirect } from 'react-router-dom';
 import {
     Paper,
     Grid
@@ -27,29 +28,31 @@ const Profile = props => {
 
     return (
         <div className={classes.root}>
-            <Grid
-                container
-                spacing={4}
-            >
+            {localStorage.getItem('key') != null ? (
                 <Grid
-                    item
-                    lg={4}
-                    md={6}
-                    xl={4}
-                    xs={12}
+                    container
+                    spacing={4}
                 >
-                    <AccountProfile />
+                    <Grid
+                        item
+                        lg={4}
+                        md={6}
+                        xl={4}
+                        xs={12}
+                    >
+                        <AccountProfile />
+                    </Grid>
+                    <Grid
+                        item
+                        lg={8}
+                        md={6}
+                        xl={8}
+                        xs={12}
+                    >
+                        <AccountDetails />
+                    </Grid>
                 </Grid>
-                <Grid
-                    item
-                    lg={8}
-                    md={6}
-                    xl={8}
-                    xs={12}
-                >
-                    <AccountDetails />
-                </Grid>
-            </Grid>
+            ) : (<Redirect to="/login" />)}
         </div>
     );
 };

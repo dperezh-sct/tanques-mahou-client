@@ -1,8 +1,9 @@
 import React, { useState, useEffect, forwardRef } from 'react';
-import { NavLink as RouterLink } from 'react-router-dom';
+import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
+import { logIn } from "../../services/api";
 import {
   Grid,
   Button,
@@ -138,30 +139,22 @@ const SignIn = props => {
     }));
   }, [formState.values]);
 
-  /** 
-    const handleBack = () => {
-      history.goBack();
-    };
-  
-    <div className={classes.contentHeader}>
-    <IconButton onClick={handleBack}>
-      <ArrowBackIcon />
-    </IconButton>
-  </div>
-  */
   function handleClick() {
     setOpen(true);
   };
+
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
+
     setOpen(false);
   };
 
 
   const handleChange = event => {
     event.persist();
+
     setFormState(formState => ({
       ...formState,
       values: {
@@ -178,8 +171,26 @@ const SignIn = props => {
     }));
   };
 
-  const handleSignIn = () => {
-    console.log("asdasd")
+  const handleLogIn = event => {
+    event.preventDefault();
+    logIn(formState.values.email, formState.values.password)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        if (json["key"] != null) {
+          localStorage.setItem("email", formState.values.email);
+          localStorage.setItem("key", json["key"]);
+          console.log("Sign-in success");
+          history.push('/');
+        } else {
+          handleClick();
+        }
+      })
+      .catch(error => {
+        console.log("Error(sign-in):" + error.message);
+      });
+
   };
 
   const hasError = field =>
@@ -206,7 +217,7 @@ const SignIn = props => {
           <div className={classes.contentBody}>
             <form
               className={classes.form}
-              onSubmit={handleSignIn}
+              onSubmit={handleLogIn}
             >
               <Typography
                 className={classes.title}
@@ -256,11 +267,10 @@ const SignIn = props => {
                 disabled={!formState.isValid}
                 fullWidth
                 size="large"
+                type="submit"
                 variant="contained"
-                component={CustomRouterLink}
-                to={'/home'}
               >
-                Sign in
+                Sign in now
                 </Button>
             </form>
             <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} >
