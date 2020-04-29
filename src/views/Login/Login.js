@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
 import { logIn } from "../../services/api";
+import { refresh } from '../../helpers/desplegablesRefresh';
 import {
   Grid,
   Button,
@@ -90,10 +91,6 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(2, 0)
   },
   alert: {
-    position: 'fixed',
-    left: '60%',
-    bottom: '10%',
-    minWidth: '300px'
   },
   logoBox: {
     padding: '0px 30px',
@@ -182,15 +179,16 @@ const SignIn = props => {
           localStorage.setItem("email", formState.values.email);
           localStorage.setItem("key", json["key"]);
           console.log("Sign-in success");
+          refresh();
           history.push('/');
         } else {
           handleClick();
         }
+
       })
       .catch(error => {
         console.log("Error(sign-in):" + error.message);
       });
-
   };
 
   const hasError = field =>
@@ -272,10 +270,11 @@ const SignIn = props => {
               >
                 Sign in now
                 </Button>
+              <Snackbar className={classes.alert} open={open} autoHideDuration={4000} onClose={handleClose} >
+                <Alert variant="filled" onClose={handleClose} severity="error">Incorrect email or password</Alert>
+              </Snackbar>
             </form>
-            <Snackbar open={open} autoHideDuration={4000} onClose={handleClose} >
-              <Alert className={classes.alert} onClose={handleClose} severity="error">Incorrect email or password</Alert>
-            </Snackbar>
+
           </div>
         </Grid>
       </Grid>
