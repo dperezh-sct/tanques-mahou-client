@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { logOut } from '../../services/api';
 import { Redirect } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 import {
   Grid,
   CircularProgress
@@ -23,12 +24,13 @@ const useStyles = makeStyles(theme => ({
 const Logout = props => {
   /**STYLES */
   const { className, ...rest } = props
+  const { isAuth, setIsAuth } = useContext(AuthContext);
+
   const classes = useStyles();
   useEffect(() => {
-    console.log('sadsxdd');
     logOut();
     localStorage.clear();
-    console.log('logout-success');
+    setIsAuth(false);
   }, []);
 
   return (

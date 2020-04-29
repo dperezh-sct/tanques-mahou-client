@@ -1,18 +1,21 @@
 
-import React, { forwardRef } from 'react';
+import React, { forwardRef, useEffect, useState, useContext } from 'react';
 import { NavLink as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import PlaylistAddCheckIcon from '@material-ui/icons/PlaylistAddCheck';
 import HomeIcon from '@material-ui/icons/Home';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import PersonIcon from '@material-ui/icons/Person';
-import VpnKeyIcon from '@material-ui/icons/VpnKey';
+import SyncIcon from '@material-ui/icons/Sync';
 import { ProfileNav } from './components';
+import { AuthContext } from '../../../contexts/AuthContext';
+import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
+import { refresh } from '../../../helpers/getData';
+import { clean } from '../../../helpers/cleanData';
 
 import {
     Button,
@@ -73,6 +76,12 @@ const useStyles = makeStyles(theme => ({
     },
     NavButton: {
         minHeight: '100%'
+    },
+    navBox: {
+        display: 'flex',
+        flexDirection: 'row',
+        width: '100%',
+        justifyContent: 'space-between'
     }
 }));
 
@@ -111,24 +120,58 @@ const CustomRouterLink = forwardRef((props, ref) => (
 
 export default function SwipeableTemporaryDrawer() {
     const classes = useStyles();
-    const [state, setState] = React.useState(false);
-
+    const [state, setState] = useState(false);
+    const { isAuth } = useContext(AuthContext);
     const toggleDrawer = (open) => event => {
         if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         }
         setState(open);
     };
-
+    const handleRefresh = () => {
+        console.log('ey')
+        refresh();
+    };
+    const handleCleanLocalStorage = () => {
+        clean();
+    };
+    useEffect(() => {
+    }, [isAuth]);
 
     return (
         <div className={classes.root}>
-            <Button
-                className={classes.NavButton}
-                onClick={toggleDrawer(true)}
-            >
-                <MenuIcon className={classes.colapseIcon} />
-            </Button>
+            {isAuth ? (
+                <div className={classes.navBox}>
+                    <Button
+                        className={classes.NavButton}
+                        onClick={toggleDrawer(true)}
+                    >
+                        <MenuIcon className={classes.colapseIcon} />
+                    </Button>
+                    <Button
+                        className={classes.NavButton}
+                        onClick={() => handleCleanLocalStorage()}
+                    >
+                        <DeleteOutlineIcon className={classes.colapseIcon} />
+                    </Button>
+                    <Button
+                        className={classes.NavButton}
+                        onClick={() => handleRefresh()}
+                    >
+                        <SyncIcon className={classes.colapseIcon} />
+                    </Button>
+                </div>
+            ) : (
+                    <div className={classes.navBox}>
+                        <Button
+                            className={classes.NavButton}
+                            onClick={toggleDrawer(true)}
+                        >
+                            <MenuIcon className={classes.colapseIcon} />
+                        </Button>
+                    </div>
+                )}
+
             <SwipeableDrawer
                 anchor={'left'}
                 open={state}

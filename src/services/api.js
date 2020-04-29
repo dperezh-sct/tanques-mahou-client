@@ -212,3 +212,8 @@ export function modeloEnfriadorDespacho() {
     "H100",
     "H200"]*/
 }
+
+export let validateAuth = new Promise((resolve) => {
+    if (localStorage.getItem('key'))
+        resolve(localStorage.getItem('key'))
+})

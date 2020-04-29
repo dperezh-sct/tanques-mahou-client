@@ -1,10 +1,11 @@
-import React, { useState, useEffect, forwardRef } from 'react';
+import React, { useState, useEffect, forwardRef, useContext } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
 import { logIn } from "../../services/api";
-import { refresh } from '../../helpers/desplegablesRefresh';
+import { refresh } from '../../helpers/getData';
+import { AuthContext } from '../../contexts/AuthContext';
 import {
   Grid,
   Button,
@@ -100,17 +101,6 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CustomRouterLink = forwardRef((props, ref) => (
-  <div
-    ref={ref}
-    style={{ flexGrow: 1 }}
-  >
-    <RouterLink {...props} />
-  </div>
-));
-
-
-
 const SignIn = props => {
 
   const { history } = props;
@@ -126,6 +116,7 @@ const SignIn = props => {
     password: ''
 
   });
+  const { isAuth, setIsAuth } = useContext(AuthContext);
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -144,7 +135,6 @@ const SignIn = props => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 
@@ -178,7 +168,7 @@ const SignIn = props => {
         if (json["key"] != null) {
           localStorage.setItem("email", formState.values.email);
           localStorage.setItem("key", json["key"]);
-          console.log("Sign-in success");
+          setIsAuth(true)
           refresh();
           history.push('/');
         } else {
