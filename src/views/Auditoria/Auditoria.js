@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { Link as RouterLink, withRouter, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import Section from '../../components/Section';
+import { AuthContext } from '../../contexts/AuthContext';
 import Stepper from './components/Stepper';
 import { FormProvider, FormContext } from '../../contexts/FormContext';
 import {
@@ -51,11 +51,13 @@ const useStyles = makeStyles(theme => ({
 const Auditoria = props => {
   /**STYLES */
   const { className, users, ...rest } = props
-  const classes = useStyles()
+  const classes = useStyles();
+  const { isAuth } = useContext(AuthContext);
+
 
   return (
     <div className={classes.root}>
-      {localStorage.getItem('key') != null ? (<Stepper />) : (<Redirect to="/login" />)}
+      {isAuth ? (<Stepper />) : (<Redirect to="/login" />)}
     </div>
   );
 };

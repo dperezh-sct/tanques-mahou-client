@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Redirect } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 import {
     Paper,
     Grid
@@ -25,10 +26,11 @@ const Profile = props => {
     /**STYLES */
     const { className, ...rest } = props
     const classes = useStyles()
+    const { isAuth } = useContext(AuthContext);
 
     return (
         <div className={classes.root}>
-            {localStorage.getItem('key') != null ? (
+            {isAuth ? (
                 <Grid
                     container
                     spacing={4}

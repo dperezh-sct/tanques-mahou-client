@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
 import { makeStyles } from '@material-ui/styles';
-import Section from '../../components/Section';
+import { AuthContext } from '../../contexts/AuthContext';
 import { AuditoriaCard } from './components';
 import {
   Paper,
@@ -96,10 +96,11 @@ const Auditorias = props => {
   /**STYLES */
   const { className, ...rest } = props
   const classes = useStyles()
+  const { isAuth } = useContext(AuthContext);
 
   return (
     <div className={classes.root}>
-      {localStorage.getItem('key') != null ? (
+      {isAuth ? (
 
         <Grid
           container
