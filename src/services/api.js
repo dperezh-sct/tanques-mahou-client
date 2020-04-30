@@ -97,6 +97,26 @@ export function tipoSistemaTanques() {
     "Neumático",
     "Electrónico"]*/
 }
+export function estructuraTanque() {
+    return fetch(process.env.API_URL + `/api/v1/tanques/get_estructuras/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'token ' + localStorage.getItem('key')
+        }
+    })
+    /**response: [
+    "Especial",
+    "Estándar horizontal",
+    "Estándar vertical",
+    "Estándar \"L\"",
+    "Estándar pirámide",
+    "Estándar contrapeado",
+    "Tanques verticales en suelo",
+    "Tanques verticales sobre estructura",
+    "Estándar avanzado",
+    "OTRO"]*/
+}
 export function modeloCompresor() {
     return fetch(process.env.API_URL + `/api/v1/tanques/get_modelos_compresores/`, {
         method: 'GET',

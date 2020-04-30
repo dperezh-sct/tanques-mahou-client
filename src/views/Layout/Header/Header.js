@@ -14,8 +14,8 @@ import SyncIcon from '@material-ui/icons/Sync';
 import { ProfileNav } from './components';
 import { AuthContext } from '../../../contexts/AuthContext';
 import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
-import { refresh } from '../../../helpers/getData';
-import { clean } from '../../../helpers/cleanData';
+import { refresh } from '../../../helpers/Data/getData';
+import { clean } from '../../../helpers/Data/cleanData';
 
 import {
     Button,
@@ -129,7 +129,6 @@ export default function SwipeableTemporaryDrawer() {
         setState(open);
     };
     const handleRefresh = () => {
-        console.log('ey')
         refresh();
     };
     const handleCleanLocalStorage = () => {

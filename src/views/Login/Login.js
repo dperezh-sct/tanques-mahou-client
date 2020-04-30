@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
 import { logIn } from "../../services/api";
-import { refresh } from '../../helpers/getData';
+import { refresh } from '../../helpers/Data/getData';
 import { AuthContext } from '../../contexts/AuthContext';
 import {
   Grid,
