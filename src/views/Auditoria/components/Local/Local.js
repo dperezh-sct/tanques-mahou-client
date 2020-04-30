@@ -3,7 +3,6 @@ import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import Section from '../../../../components/Section';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
 import Camera from '../../../../components/Camera';
 import {
   Grid,
@@ -79,13 +78,16 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-
+const empresas = localStorage.getItem('empresas')
 
 const Local = props => {
   /**STYLES */
   const { className, ...rest } = props
   const classes = useStyles()
-  // The first commit of Material-UI
+  const [typing, setTyping] = useState('');
+  const handleTypingComplete = (input) => {
+
+  };
   const [selectedDateVisita, setSelectedDateVisita] = React.useState(new Date('2014-08-18T21:11:54'));
   const handleDateChangeVisita = (date) => {
     setSelectedDateVisita(date);

@@ -1,19 +1,16 @@
-import React, { useState, useEffect, useContext, forwardRef } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
+import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import Section from '../../../../components/Section';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import Camera from '../../../../components/Camera';
 import {
   TextField,
   FormControl,
-  IconButton,
   Select,
   MenuItem,
   InputLabel
 } from '@material-ui/core';
+import { AuthContext } from '../../../../contexts/AuthContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -80,19 +77,24 @@ const useStyles = makeStyles(theme => ({
   },
 
 }));
+const accesoOp = ["puerta principal",
+  "puerta en almacén",
+  "registro",
+  "otro"];
 const Estacionamiento = props => {
   /**STYLES */
-  const { className, users, ...rest } = props
+  const { className, ...rest } = props
   const classes = useStyles()
-  const [permiso, setPermiso] = React.useState('');
+  const { accesoManguera, setAccesoManguera } = useContext(AuthContext);
+  const [permiso, setPermiso] = useState('');
   const handleChangePermiso = (event) => {
     setPermiso(event.target.value);
   };
-  const [zona, setZona] = React.useState('');
+  const [zona, setZona] = useState('');
   const handleChangeZona = (event) => {
     setZona(event.target.value);
   };
-  const [acceso, setAcceso] = React.useState('');
+  const [acceso, setAcceso] = useState('');
   const handleChangeAcceso = (event) => {
     setAcceso(event.target.value);
   };
@@ -169,13 +171,11 @@ const Estacionamiento = props => {
                 onChange={handleChangeAcceso}
                 label="Acceso con manguera"
               >
-                <MenuItem value={'PP'}>Puerta principal</MenuItem>
-                <MenuItem value={'PA'}>Puerta en almacén</MenuItem>
-                <MenuItem value={'R'}>Registro</MenuItem>
-                <MenuItem value={'O'}>Otro</MenuItem>
+                {accesoOp.map((item) => (
+                  <MenuItem key={accesoOp.indexOf(item)} value={item}>{item}</MenuItem>
+                ))}
               </Select>
             </FormControl>
-
 
           </div>
           <div className={classes.row}>

@@ -1,11 +1,11 @@
 /**
  * FUNCIONES PARA LA SESION
  * **/
-export function logIn(email, password) {
+export function logIn(username, password) {
     return fetch(process.env.API_URL + `/auth/login/`, {
         method: 'POST',
         body: JSON.stringify({
-            email,
+            username,
             password
         }),
         headers: {
@@ -22,10 +22,14 @@ export function logOut() {
         }
     })
 }
+export let validateAuth = new Promise((resolve) => {
+    if (localStorage.getItem('key'))
+        resolve(localStorage.getItem('key'))
+})
 /**
  * FUNCIONES PARA DESPLEGABLES
  * **/
-export function accesoManguera() {
+export function getAccesoManguera() {
     return fetch(process.env.API_URL + `/api/v1/estacionamientos/get_accesos_manguera/`, {
         method: 'GET',
         headers: {
@@ -39,7 +43,7 @@ export function accesoManguera() {
     		"registro",
     		"otro"]*/
 }
-export function modeloTanque() {
+export function getModeloTanque() {
     return fetch(process.env.API_URL + `/api/v1/tanques/get_modelos/`, {
         method: 'GET',
         headers: {
@@ -55,7 +59,7 @@ export function modeloTanque() {
     "VERTICAL 500Lx830",
     "VERTICAL 500Lx860"]*/
 }
-export function acabadoTanque() {
+export function getAcabadoTanque() {
     return fetch(process.env.API_URL + `/api/v1/tanques/get_acabados/`, {
         method: 'GET',
         headers: {
@@ -70,7 +74,7 @@ export function acabadoTanque() {
     "GRIS",
     "OTRO"]*/
 }
-export function modeloEnfriadorTanques() {
+export function getModeloEnfriadorTanques() {
     return fetch(process.env.API_URL + `/api/v1/tanques/enfriadores_tanques/get_modelos_enfriadores/`, {
         method: 'GET',
         headers: {
@@ -85,7 +89,7 @@ export function modeloEnfriadorTanques() {
     "H100",
     "H200"]*/
 }
-export function tipoSistemaTanques() {
+export function getTipoSistemaTanques() {
     return fetch(process.env.API_URL + `/api/v1/tanques/get_tipos/`, {
         method: 'GET',
         headers: {
@@ -97,7 +101,7 @@ export function tipoSistemaTanques() {
     "Neumático",
     "Electrónico"]*/
 }
-export function estructuraTanque() {
+export function getEstructuraTanque() {
     return fetch(process.env.API_URL + `/api/v1/tanques/get_estructuras/`, {
         method: 'GET',
         headers: {
@@ -117,7 +121,7 @@ export function estructuraTanque() {
     "Estándar avanzado",
     "OTRO"]*/
 }
-export function modeloCompresor() {
+export function getModeloCompresor() {
     return fetch(process.env.API_URL + `/api/v1/tanques/get_modelos_compresores/`, {
         method: 'GET',
         headers: {
@@ -132,7 +136,7 @@ export function modeloCompresor() {
     "272 L",
     "OTRO"]*/
 }
-export function categoriasDespacho() {
+export function getCategoriasDespacho() {
     return fetch(process.env.API_URL + `/api/v1/despachos/categorias/`, {
         method: 'GET',
         headers: {
@@ -148,7 +152,7 @@ export function categoriasDespacho() {
         ...
     ]*/
 }
-export function codigoProductoDespacho() {
+export function getCodigoProductoDespacho() {
     return fetch(process.env.API_URL + `/api/v1/despachos/productos_base/`, {
         method: 'GET',
         headers: {
@@ -167,7 +171,7 @@ export function codigoProductoDespacho() {
         ...
     ]*/
 }
-export function modeloColumnaDespacho() {
+export function getModeloColumnaDespacho() {
     return fetch(process.env.API_URL + `/api/v1/despachos/productos_despacho/`, {
         method: 'GET',
         headers: {
@@ -199,7 +203,7 @@ export function modeloColumnaDespacho() {
         ...
     ]*/
 }
-export function acabadoDespacho() {
+export function getAcabadoDespacho() {
     return fetch(process.env.API_URL + `/api/v1/despachos/acabados/`, {
         method: 'GET',
         headers: {
@@ -215,7 +219,7 @@ export function acabadoDespacho() {
         ...
     ]*/
 }
-export function modeloEnfriadorDespacho() {
+export function getModeloEnfriadorDespacho() {
     return fetch(process.env.API_URL + `/api/v1/despachos/enfriadores_despacho/get_modelos_enfriadores_despacho/`, {
         method: 'GET',
         headers: {
@@ -232,8 +236,20 @@ export function modeloEnfriadorDespacho() {
     "H100",
     "H200"]*/
 }
-
-export let validateAuth = new Promise((resolve) => {
-    if (localStorage.getItem('key'))
-        resolve(localStorage.getItem('key'))
-})
+/**LISTADDOS DE AUTOCOMPLETADO */
+export function getEmpresas() {
+    return fetch(process.env.API_URL + `/api/v1/locales/empresas_stp/`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'token ' + localStorage.getItem('key')
+        }
+    })
+    /**response: [
+       {
+            "id": 96,
+            "nombre": "NAVAR5STPTECNIC, S.L.",
+            "bo": 262
+        },
+    ]*/
+}

@@ -18,13 +18,13 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Alert } from '@material-ui/lab/';
 
-
+/** 
 const schema = {
-  email: {
+  username: {
     presence: { allowEmpty: false, message: 'is required' },
-    email: true,
+    username: true,
     length: {
-      maximum: 64
+      maximum: 10
     }
   },
   password: {
@@ -33,7 +33,16 @@ const schema = {
       maximum: 128
     }
   }
+};*/
+const schema = {
+  password: {
+    presence: { allowEmpty: false, message: 'is required' },
+    length: {
+      maximum: 128
+    }
+  }
 };
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -106,6 +115,7 @@ const SignIn = props => {
   const { history } = props;
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
+  const [username, setUserName] = useState('');
   const [formState, setFormState] = useState({
     isValid: false,
     values: {},
@@ -127,6 +137,9 @@ const SignIn = props => {
     }));
   }, [formState.values]);
 
+  function handleChangeUsername(input) {
+    setUserName(input)
+  }
   function handleClick() {
     setOpen(true);
   };
@@ -160,13 +173,13 @@ const SignIn = props => {
 
   const handleLogIn = event => {
     event.preventDefault();
-    logIn(formState.values.email, formState.values.password)
+    logIn(username, formState.values.password)
       .then(response => {
         return response.json();
       })
       .then(json => {
         if (json["key"] != null) {
-          localStorage.setItem("email", formState.values.email);
+          localStorage.setItem("username", username);
           localStorage.setItem("key", json["key"]);
           setIsAuth(true)
           refresh();
@@ -174,7 +187,6 @@ const SignIn = props => {
         } else {
           handleClick();
         }
-
       })
       .catch(error => {
         console.log("Error(sign-in):" + error.message);
@@ -211,28 +223,25 @@ const SignIn = props => {
                 className={classes.title}
                 variant="h2"
               >
-                Sign in
+                Inicio de sesión
                 </Typography>
               <Typography
                 color="textSecondary"
                 gutterBottom
               >
-                Sign in with email address
+                Inicia sesión con tu código
                 </Typography>
+
 
               <TextField
                 className={classes.textField}
-                error={hasError('email')}
                 fullWidth
-                helperText={
-                  hasError('email') ? formState.errors.email[0] : null
-                }
-                label="Email address"
-                name="email"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.email || ''}
+                label="Username"
+                name="name"
+                onChange={(event) => handleChangeUsername(event.target.value)}
+                type="number"
                 variant="outlined"
+                value={username}
                 id="outlined-required"
               />
               <TextField
@@ -252,13 +261,12 @@ const SignIn = props => {
               <Button
                 className={classes.signInButton}
                 color="primary"
-                disabled={!formState.isValid}
                 fullWidth
                 size="large"
                 type="submit"
                 variant="contained"
               >
-                Sign in now
+                Ingresar
                 </Button>
               <Snackbar className={classes.alert} open={open} autoHideDuration={4000} onClose={handleClose} >
                 <Alert variant="filled" onClose={handleClose} severity="error">Incorrect email or password</Alert>
@@ -277,3 +285,19 @@ SignIn.propTypes = {
 };
 
 export default SignIn;
+/**<TextField
+                className={classes.textField}
+                error={hasError('email')}
+                fullWidth
+                helperText={
+                  hasError('email') ? formState.errors.email[0] : null
+                }
+                label="Email address"
+                name="email"
+                onChange={handleChange}
+                type="text"
+                value={formState.values.email || ''}
+                variant="outlined"
+                id="outlined-required"
+
+              /> */

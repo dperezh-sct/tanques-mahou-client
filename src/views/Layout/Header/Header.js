@@ -131,9 +131,6 @@ export default function SwipeableTemporaryDrawer() {
     const handleRefresh = () => {
         refresh();
     };
-    const handleCleanLocalStorage = () => {
-        clean();
-    };
     useEffect(() => {
     }, [isAuth]);
 
@@ -146,12 +143,6 @@ export default function SwipeableTemporaryDrawer() {
                         onClick={toggleDrawer(true)}
                     >
                         <MenuIcon className={classes.colapseIcon} />
-                    </Button>
-                    <Button
-                        className={classes.NavButton}
-                        onClick={() => handleCleanLocalStorage()}
-                    >
-                        <DeleteOutlineIcon className={classes.colapseIcon} />
                     </Button>
                     <Button
                         className={classes.NavButton}

@@ -134,8 +134,26 @@ const useStyles = makeStyles(theme => ({
     }
 
 }));
-
-const categoriasOp = ['1', '2', '3'];
+const columnasOp = ['Metrópolis',
+    'M',
+    'Mahoudrid',
+    'Palma',
+    'Palma doble',
+    'Ávila',
+    'Tanque MH',
+    'Gama tanque',
+    'Especial (poner en observaciones)']
+const categoriasOp = ['PRODUCTOS TANQUE',
+    'PRODUCTOS SM',
+    'PRODUCTOS MAHOU',
+    'PRODUCTOS ALHAMBRA',
+    'PRODUCTOS MEZQUITA',
+    'PRODUCTOS NÓMADA',
+    'PRODUCTOS FOUNDERS',
+    'PRODUCTOS LA SALVE',
+    'PRODUCTOS AGUILA NEGRA',
+    'ABInbev',
+    'OTROS PRODUCTOS'];
 const acabadosOp = [
     'INOX',
     'COBRE',
@@ -373,13 +391,26 @@ const Productos = props => {
                                             </FormControl>
                                         </div>
                                         <div className={classes.row}>
-                                            <TextField
-                                                id="outlined-secondary"
-                                                label="Modelo de la columna"
+                                            <FormControl
                                                 variant="outlined"
-
                                                 className={classes.inputTextGrow4}
-                                            />
+                                            >
+                                                <InputLabel>Modelo de la columna</InputLabel>
+                                                <Select
+                                                    value={codigos[products.indexOf(product)]}
+                                                    onChange={(event) => handleChangeCodigo(event, products.indexOf(product))}
+                                                    label="Modelo de la columna"
+                                                >
+                                                    {columnasOp.map((item) => (
+                                                        <MenuItem
+                                                            key={columnasOp.indexOf(item)}
+                                                            value={item}
+                                                        >
+                                                            {item}
+                                                        </MenuItem>
+                                                    ))}
+                                                </Select>
+                                            </FormControl>
                                         </div>
                                         <div className={classes.row}>
                                             <FormControl

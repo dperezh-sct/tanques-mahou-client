@@ -1,20 +1,21 @@
 import {
-    accesoManguera,
-    modeloTanque,
-    acabadoTanque,
-    modeloEnfriadorTanques,
-    tipoSistemaTanques,
-    estructuraTanque,
-    modeloCompresor,
-    categoriasDespacho,
-    codigoProductoDespacho,
-    modeloColumnaDespacho,
-    acabadoDespacho,
-    modeloEnfriadorDespacho
+    getAccesoManguera,
+    getModeloTanque,
+    getAcabadoTanque,
+    getModeloEnfriadorTanques,
+    getTipoSistemaTanques,
+    getEstructuraTanque,
+    getModeloCompresor,
+    getCategoriasDespacho,
+    getCodigoProductoDespacho,
+    getModeloColumnaDespacho,
+    getAcabadoDespacho,
+    getModeloEnfriadorDespacho,
+    getEmpresas
 } from '../../services/api';
 
-const getAccesoManguera = () => {
-    accesoManguera()
+const GetAccesoManguera = () => {
+    getAccesoManguera()
         .then(response => {
             return response.json();
         })
@@ -27,8 +28,8 @@ const getAccesoManguera = () => {
             console.log("Error(accesoManguera):" + error.message);
         });
 };
-const getModeloTanque = () => {
-    modeloTanque()
+const GetModeloTanque = () => {
+    getModeloTanque()
         .then(response => {
             return response.json();
         })
@@ -41,8 +42,8 @@ const getModeloTanque = () => {
             console.log("Error(modeloTanque):" + error.message);
         });
 };
-const getAcabadoTanque = () => {
-    acabadoTanque()
+const GetAcabadoTanque = () => {
+    getAcabadoTanque()
         .then(response => {
             return response.json();
         })
@@ -55,8 +56,8 @@ const getAcabadoTanque = () => {
             console.log("Error(acabadoTanque):" + error.message);
         });
 };
-const getModeloEnfriadorTanques = () => {
-    modeloEnfriadorTanques()
+const GetModeloEnfriadorTanques = () => {
+    getModeloEnfriadorTanques()
         .then(response => {
             return response.json();
         })
@@ -69,8 +70,8 @@ const getModeloEnfriadorTanques = () => {
             console.log("Error(modeloEnfriadorTanques):" + error.message);
         });
 };
-const getTipoSistemaTanques = () => {
-    tipoSistemaTanques()
+const GetTipoSistemaTanques = () => {
+    getTipoSistemaTanques()
         .then(response => {
             return response.json();
         })
@@ -83,8 +84,8 @@ const getTipoSistemaTanques = () => {
             console.log("Error(tipoSistemaTanques):" + error.message);
         });
 };
-const getEstructuraTanque = () => {
-    estructuraTanque()
+const GetEstructuraTanque = () => {
+    getEstructuraTanque()
         .then(response => {
             return response.json();
         })
@@ -97,8 +98,8 @@ const getEstructuraTanque = () => {
             console.log("Error(estructuraTanque):" + error.message);
         });
 };
-const getModeloCompresor = () => {
-    modeloCompresor()
+const GetModeloCompresor = () => {
+    getModeloCompresor()
         .then(response => {
             return response.json();
         })
@@ -111,8 +112,8 @@ const getModeloCompresor = () => {
             console.log("Error(modeloCompresor):" + error.message);
         });
 };
-const getCategoriasDespacho = () => {
-    categoriasDespacho()
+const GetCategoriasDespacho = () => {
+    getCategoriasDespacho()
         .then(response => {
             return response.json();
         })
@@ -125,8 +126,8 @@ const getCategoriasDespacho = () => {
             console.log("Error(categoriasDespacho):" + error.message);
         });
 };
-const getCodigoProductoDespacho = () => {
-    codigoProductoDespacho()
+const GetCodigoProductoDespacho = () => {
+    getCodigoProductoDespacho()
         .then(response => {
             return response.json();
         })
@@ -139,8 +140,8 @@ const getCodigoProductoDespacho = () => {
             console.log("Error(codigoProductoDespacho):" + error.message);
         });
 };
-const getModeloColumnaDespacho = () => {
-    modeloColumnaDespacho()
+const GetModeloColumnaDespacho = () => {
+    getModeloColumnaDespacho()
         .then(response => {
             return response.json();
         })
@@ -153,8 +154,8 @@ const getModeloColumnaDespacho = () => {
             console.log("Error(modeloColumnaDespacho):" + error.message);
         });
 };
-const getAcabadoDespacho = () => {
-    acabadoDespacho()
+const GetAcabadoDespacho = () => {
+    getAcabadoDespacho()
         .then(response => {
             return response.json();
         })
@@ -167,8 +168,8 @@ const getAcabadoDespacho = () => {
             console.log("Error(acabadoDespacho):" + error.message);
         });
 };
-const getModeloEnfriadorDespacho = () => {
-    modeloEnfriadorDespacho()
+const GetModeloEnfriadorDespacho = () => {
+    getModeloEnfriadorDespacho()
         .then(response => {
             return response.json();
         })
@@ -181,17 +182,32 @@ const getModeloEnfriadorDespacho = () => {
             console.log("Error(modeloEnfriadorDespacho):" + error.message);
         });
 };
+const GetEmpresas = () => {
+    getEmpresas()
+        .then(response => {
+            return response.json();
+        })
+        .then(json => {
+            localStorage.setItem("empresas", json);
+            console.log("empresas obtenido");
+            console.log(json);
+        })
+        .catch(error => {
+            console.log("Error(empresas):" + error.message);
+        });
+};
 export function refresh() {
-    getAccesoManguera();
-    getModeloTanque();
-    getAcabadoTanque();
-    getModeloEnfriadorTanques();
-    getTipoSistemaTanques();
-    getEstructuraTanque();
-    getModeloCompresor();
-    getCategoriasDespacho();
-    getCodigoProductoDespacho();
-    getModeloColumnaDespacho();
-    getAcabadoDespacho();
-    getModeloEnfriadorDespacho();
+    GetAccesoManguera();
+    GetModeloTanque();
+    GetAcabadoTanque();
+    GetModeloEnfriadorTanques();
+    GetTipoSistemaTanques();
+    GetEstructuraTanque();
+    GetModeloCompresor();
+    GetCategoriasDespacho();
+    GetCodigoProductoDespacho();
+    GetModeloColumnaDespacho();
+    GetAcabadoDespacho();
+    GetModeloEnfriadorDespacho();
+    GetEmpresas();
 };
