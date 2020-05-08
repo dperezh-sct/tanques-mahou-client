@@ -236,7 +236,7 @@ const SignIn = props => {
               <TextField
                 className={classes.textField}
                 fullWidth
-                label="Username"
+                label="Código de técnico"
                 name="name"
                 onChange={(event) => handleChangeUsername(event.target.value)}
                 type="number"
