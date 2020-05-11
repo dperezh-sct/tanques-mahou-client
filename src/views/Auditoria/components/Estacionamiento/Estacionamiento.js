@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Link as Redirect } from 'react-router-dom';
+
 import { makeStyles } from '@material-ui/styles';
 import Section from '../../../../components/Section';
 import Camera from '../../../../components/Camera';
@@ -11,6 +13,7 @@ import {
   InputLabel
 } from '@material-ui/core';
 import { AuthContext } from '../../../../contexts/AuthContext';
+import { FormContext } from '../../../../contexts/FormContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -77,138 +80,184 @@ const useStyles = makeStyles(theme => ({
   },
 
 }));
-const accesoOp = ["puerta principal",
-  "puerta en almacén",
-  "registro",
-  "otro"];
 const Estacionamiento = props => {
   /**STYLES */
   const { className, ...rest } = props
   const classes = useStyles()
-  const { accesoManguera, setAccesoManguera } = useContext(AuthContext);
-  const [permiso, setPermiso] = useState('');
+  const { isAuth } = useContext(AuthContext);
+
+
+  const [accesoOp, setAccesoOp] = useState([]);
+
+  const { zonaCargaDescarga, setZonaCargaDescarga,
+    permisoCargaDescarga, setPermisoCargaDescarga,
+    photoCargaDescarga, setPhotoCargaDescarga,
+    accesoManguera, setAccesoManguera,
+    obs1Estacionamiento, setObs1Estacionamiento,
+    distancia, setDistancia,
+    photoAccesoManguera, setPhotoAccesoManguera,
+    obs2Estacionamiento, setObs2Estacionamiento,
+    desnivelCamionTanque, setDesnivelCamionTanque,
+    desnivelTanqueCamion, setDesnivelTanqueCamion } = useContext(FormContext);
+
   const handleChangePermiso = (event) => {
-    setPermiso(event.target.value);
+    setPermisoCargaDescarga(event.target.value);
   };
-  const [zona, setZona] = useState('');
   const handleChangeZona = (event) => {
-    setZona(event.target.value);
+    setZonaCargaDescarga(event.target.value);
   };
-  const [acceso, setAcceso] = useState('');
-  const handleChangeAcceso = (event) => {
-    setAcceso(event.target.value);
+  const handleObs1 = (event) => {
+    setObs1Estacionamiento(event.target.value);
   };
+  const handleDistancia = (event) => {
+    setDistancia(event.target.value);
+  };
+  const handleChangeAccesoManguera = (event) => {
+    setAccesoManguera(event.target.value);
+  };
+  const handleObs2 = (event) => {
+    setObs2Estacionamiento(event.target.value);
+  };
+  const handleDesnivelCamionTanque = (event) => {
+    setDesnivelCamionTanque(event.target.value);
+  };
+  const handleDesnivelTanqueCamion = (event) => {
+    setDesnivelTanqueCamion(event.target.value);
+  };
+
+
+  useEffect(() => {
+    if (isAuth) { setAccesoOp(JSON.parse(localStorage.getItem('accesoManguera'))) }
+  }, []);
 
   return (
     <div className={classes.root}>
-      <Section title='Estacionamiento'>
-        <FormControl variant="outlined" className={classes.formControl}>
+      {isAuth ? (
+        <Section title='Estacionamiento'>
+          <FormControl variant="outlined" className={classes.formControl}>
 
 
-          <div className={classes.row}>
-            <FormControl
-              variant="outlined"
-              className={classes.inputTextGrow4}
-            >
-              <InputLabel>Zona de carga y descarga</InputLabel>
-              <Select
-                value={zona}
-                onChange={handleChangeZona}
-                label="Zona"
+            <div className={classes.row}>
+              <FormControl
+                variant="outlined"
+                className={classes.inputTextGrow4}
               >
-                <MenuItem value={'SI'}>SI</MenuItem>
-                <MenuItem value={'NO'}>NO</MenuItem>
-              </Select>
-            </FormControl>
+                <InputLabel>Zona de carga y descarga</InputLabel>
+                <Select
+                  value={zonaCargaDescarga}
+                  onChange={handleChangeZona}
+                  label="Zona de carga y descarga"
+                >
+                  <MenuItem value={'SI'}>SI</MenuItem>
+                  <MenuItem value={'NO'}>NO</MenuItem>
+                </Select>
+              </FormControl>
 
-          </div>
-          <div className={classes.row}>
-            <FormControl
-              variant="outlined"
-              className={classes.inputTextGrow4}
-            >
-              <InputLabel>Permiso de carga y descarga</InputLabel>
-              <Select
-                value={permiso}
-                onChange={handleChangePermiso}
-                label="Permiso"
-                className={classes.selectInput}
+            </div>
+            <div className={classes.row}>
+              <FormControl
+                variant="outlined"
+                className={classes.inputTextGrow4}
               >
-                <MenuItem value={'SI'}>SI</MenuItem>
-                <MenuItem value={'NO'}>NO</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div className={classes.row}>
-            <Camera name='Foto de zona de carga y descarga' />
-          </div>
-          <div className={classes.row}>
-            <TextField
-              id="outlined-multiline-static"
-              label="Observaciones"
-              multiline
-              rows="3"
-              variant="outlined"
-              className={classes.inputTextGrow4}
-            />
-          </div>
-          <div className={classes.row}>
-            <TextField
-              id="outlined-multiline-static"
-              label="Distancia (m)"
-              variant="outlined"
-              className={classes.inputTextGrow4}
-            />
-          </div>
-          <div className={classes.row}>
-            <FormControl
-              variant="outlined"
-              className={classes.inputTextGrow4}
-            >
-              <InputLabel>Acceso con manguera</InputLabel>
-              <Select
-                value={acceso}
-                onChange={handleChangeAcceso}
-                label="Acceso con manguera"
+                <InputLabel>Permiso de carga y descarga</InputLabel>
+                <Select
+                  value={permisoCargaDescarga}
+                  onChange={handleChangePermiso}
+                  label="Permiso de carga y descarga"
+                  className={classes.selectInput}
+                >
+                  <MenuItem value={'SI'}>SI</MenuItem>
+                  <MenuItem value={'NO'}>NO</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <div className={classes.row}>
+              <Camera name='Foto de zona de carga y descarga' />
+            </div>
+            <div className={classes.row}>
+              <TextField
+                id="outlined-multiline-static"
+                label="Observaciones"
+                multiline
+                rows="3"
+                variant="outlined"
+                className={classes.inputTextGrow4}
+                value={obs1Estacionamiento}
+                onChange={(event) => handleObs1(event)}
+              />
+            </div>
+            <div className={classes.row}>
+              <TextField
+                id="outlined-multiline-static"
+                label="Distancia (m)"
+                variant="outlined"
+                type='number'
+                className={classes.inputTextGrow4}
+                value={distancia}
+                onChange={handleDistancia}
+              />
+            </div>
+            <div className={classes.row}>
+              <FormControl
+                variant="outlined"
+                className={classes.inputTextGrow4}
               >
-                {accesoOp.map((item) => (
-                  <MenuItem key={accesoOp.indexOf(item)} value={item}>{item}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>
+                <InputLabel>Acceso con manguera</InputLabel>
+                <Select
+                  value={accesoManguera}
+                  onChange={handleChangeAccesoManguera}
+                  label="Acceso con manguera"
+                >
+                  {accesoOp.map((item) => (
+                    <MenuItem key={accesoOp.indexOf(item)} value={item}>{item}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
-          </div>
-          <div className={classes.row}>
-            <Camera name='Foto de acceso con manguera' />
-          </div>
-          <div className={classes.row}>
-            <TextField
-              id="outlined-multiline-static"
-              label="Observaciones (Especificar otro)"
-              multiline
-              rows="3"
-              variant="outlined"
-              className={classes.inputTextGrow4}
-            />
-          </div>
-          <div className={classes.row}>
-            <TextField
-              id="outlined-multiline-static"
-              label="Metros de desnivel de camión a tanques"
-              variant="outlined"
-              className={classes.inputTextGrow4}
-            />
-          </div>
-          <div className={classes.row}>
-            <TextField
-              id="outlined-multiline-static"
-              label="Metros de desnivel de tanques a barra"
-              variant="outlined"
-              className={classes.inputTextGrow4}
-            />
-          </div>
-        </FormControl>
-      </Section>
+            </div>
+            <div className={classes.row}>
+              <Camera name='Foto de acceso con manguera' />
+            </div>
+            <div className={classes.row}>
+              <TextField
+                id="outlined-multiline-static"
+                label="Observaciones (Especificar otro)"
+                multiline
+                rows="3"
+                variant="outlined"
+                className={classes.inputTextGrow4}
+                value={obs2Estacionamiento}
+                onChange={(event) => handleObs2(event)}
+              />
+            </div>
+            <div className={classes.row}>
+              <TextField
+                id="outlined-multiline-static"
+                label="Metros de desnivel de camión a tanques"
+                variant="outlined"
+                type='number'
+
+                className={classes.inputTextGrow4}
+                value={desnivelCamionTanque}
+                onChange={(event) => handleDesnivelCamionTanque(event)}
+              />
+            </div>
+            <div className={classes.row}>
+              <TextField
+                id="outlined-multiline-static"
+                label="Metros de desnivel de tanques a barra"
+                variant="outlined"
+                type='number'
+                className={classes.inputTextGrow4}
+                value={desnivelTanqueCamion}
+                onChange={(event) => handleDesnivelTanqueCamion(event)}
+              />
+            </div>
+          </FormControl>
+        </Section>)
+        :
+        (<Redirect to="/login" />)
+      }
     </div>
   );
 };
