@@ -15,6 +15,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
+import { FormContext } from '../../../../contexts/FormContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -84,18 +85,55 @@ const Local = props => {
   /**STYLES */
   const { className, ...rest } = props
   const classes = useStyles()
-  const [typing, setTyping] = useState('');
-  const handleTypingComplete = (input) => {
 
+  const { nombreEstab, setNombreEstab, fotoLocal, setFotoLocal, nombreEmpresa, setNombreEmpresa,
+    codigoCliente, setCodigoCliente, nifCif, setNifCif, empresaSTP, setEmpresaSTP, direccion,
+    setDireccion, fechaVisita, setFechaVisita, fechaAlta, setFechaAlta, ciudad, setCiudad,
+    cp, setCP, provincia, setProvincia, telefono, setTelefono, correo, setCorreo } = useContext(FormContext);
+
+  const handleNombreEstab = (event) => {
+    setNombreEstab(event.target.value);
   };
-  const [selectedDateVisita, setSelectedDateVisita] = React.useState(new Date('2014-08-18T21:11:54'));
+  const handleFotoLocal = (file) => {
+    setFotoLocal(file);
+  };
+  const handleNombreEmpresa = (event) => {
+    setNombreEmpresa(event.target.value);
+  };
+  const handleCodigoCliente = (event) => {
+    setCodigoCliente(event.target.value);
+  };
+  const handleNifCif = (event) => {
+    setNifCif(event.target.value);
+  };
+  const handleEmpresaSTP = (event) => {
+    setEmpresaSTP(event.target.value);
+  };
+  const handleDireccion = (event) => {
+    setDireccion(event.target.value);
+  };
   const handleDateChangeVisita = (date) => {
-    setSelectedDateVisita(date);
+    setFechaVisita(new Date(date));
   };
-  const [selectedDateAlta, setSelectedDateAlta] = React.useState(new Date('2014-08-18T21:11:54'));
   const handleDateChangeAlta = (date) => {
-    setSelectedDateAlta(date);
+    setFechaAlta(new Date(date));
   };
+  const handleCiudad = (event) => {
+    setCiudad(event.target.value);
+  };
+  const handleTelefono = (event) => {
+    setTelefono(event.target.value);
+  };
+  const handleCP = (event) => {
+    setCP(event.target.value);
+  };
+  const handleProvincia = (event) => {
+    setProvincia(event.target.value);
+  };
+  const handleCorreo = (event) => {
+    setCorreo(event.target.value);
+  };
+
 
   return (
     <div className={classes.root}>
@@ -108,6 +146,8 @@ const Local = props => {
               label="Nombre establecimiento"
               variant="outlined"
               className={classes.inputTextGrow4}
+              value={nombreEstab}
+              onChange={handleNombreEstab}
             />
           </div>
           <div className={classes.row}>
@@ -119,6 +159,8 @@ const Local = props => {
               label="Nombre empresa"
               variant="outlined"
               className={classes.inputTextGrow4}
+              value={nombreEmpresa}
+              onChange={handleNombreEmpresa}
             />
           </div>
           <div className={classes.row}>
@@ -127,12 +169,16 @@ const Local = props => {
               label="Código del cliente"
               variant="outlined"
               className={classes.inputTextGrow2}
+              value={codigoCliente}
+              onChange={handleCodigoCliente}
             />
             <TextField
               id="outlined-secondary"
               label="NIF/CIF."
               variant="outlined"
               className={classes.inputTextGrow2}
+              value={nifCif}
+              onChange={handleNifCif}
             />
           </div>
           <div className={classes.row}>
@@ -141,6 +187,8 @@ const Local = props => {
               label="Empresa STP"
               variant="outlined"
               className={classes.inputTextGrow4}
+              value={empresaSTP}
+              onChange={handleEmpresaSTP}
             />
           </div>
           <div className={classes.row}>
@@ -149,6 +197,8 @@ const Local = props => {
               label="Dirección"
               variant="outlined"
               className={classes.inputTextGrow4}
+              value={direccion}
+              onChange={handleDireccion}
             />
           </div>
           <div className={classes.row}>
@@ -161,7 +211,7 @@ const Local = props => {
                 format="MM/dd/yyyy"
                 margin="normal"
                 label="Fecha de visita"
-                value={selectedDateVisita}
+                value={fechaVisita}
                 onChange={handleDateChangeVisita}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
@@ -180,7 +230,7 @@ const Local = props => {
                 format="MM/dd/yyyy"
                 margin="normal"
                 label="Fecha de alta"
-                value={selectedDateAlta}
+                value={fechaAlta}
                 onChange={handleDateChangeAlta}
                 KeyboardButtonProps={{
                   'aria-label': 'change date',
@@ -194,6 +244,8 @@ const Local = props => {
               label="Ciudad"
               variant="outlined"
               className={classes.inputTextGrow4}
+              value={ciudad}
+              onChange={handleCiudad}
             />
           </div>
           <div className={classes.row}>
@@ -202,12 +254,16 @@ const Local = props => {
               label="CP"
               variant="outlined"
               className={classes.inputTextGrow1}
+              value={cp}
+              onChange={handleCP}
             />
             <TextField
               id="outlined-secondary"
               label="Provincia"
               variant="outlined"
               className={classes.inputTextGrow3}
+              value={provincia}
+              onChange={handleProvincia}
             />
           </div>
           <div className={classes.row}>
@@ -216,14 +272,18 @@ const Local = props => {
               label="Teléfono"
               variant="outlined"
               className={classes.inputTextGrow4}
+              value={telefono}
+              onChange={handleTelefono}
             />
           </div>
           <div className={classes.row}>
             <TextField
               id="outlined-secondary"
-              label="Email"
+              label="Correo"
               variant="outlined"
               className={classes.inputTextGrow4}
+              value={correo}
+              onChange={handleCorreo}
             />
           </div>
         </FormControl>

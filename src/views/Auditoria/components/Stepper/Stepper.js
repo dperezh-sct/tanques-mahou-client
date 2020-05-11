@@ -13,7 +13,7 @@ import Despacho from '../Despacho';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '100%',
+        maxWidth: '350px',
     },
     button: {
         marginRight: theme.spacing(1),
