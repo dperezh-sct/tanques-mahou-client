@@ -1,22 +1,38 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Link as RouterLink, withRouter, Redirect } from 'react-router-dom';
+import React, { useContext } from 'react';
+import { Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+
 import { AuthContext } from '../../contexts/AuthContext';
+import { FormProvider } from '../../contexts/FormContext';
+
 import Stepper from './components/Stepper';
-import { FormProvider, FormContext } from '../../contexts/FormContext';
-import {
-  Paper,
-  Tabs,
-  TextField,
-  Select,
-  Tab,
-  FormControl,
-  InputLabel,
-  Dialog,
-  DialogContent,
-  DialogActions
-} from '@material-ui/core';
+
+const Auditoria = props => {
+  /**STYLES */
+  const { className, users, ...rest } = props
+  const classes = useStyles();
+  const { isAuth } = useContext(AuthContext);
+
+  return (
+    <div>
+      {isAuth && localStorage.getItem('key') ? (
+        <FormProvider>
+          <div className={classes.root}>
+            <Stepper />
+          </div>
+
+        </FormProvider>) : (
+          <Redirect to="/login" />
+        )
+      }
+    </div>
+  )
+};
+
+Auditoria.propTypes = {
+  history: PropTypes.object
+};
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -46,24 +62,4 @@ const useStyles = makeStyles(theme => ({
   },
 
 }));
-
-
-const Auditoria = props => {
-  /**STYLES */
-  const { className, users, ...rest } = props
-  const classes = useStyles();
-  const { isAuth } = useContext(AuthContext);
-
-
-  return (
-    <div className={classes.root}>
-      {isAuth ? (<Stepper />) : (<Redirect to="/login" />)}
-    </div>
-  );
-};
-
-Auditoria.propTypes = {
-  history: PropTypes.object
-};
-
 export default Auditoria;
