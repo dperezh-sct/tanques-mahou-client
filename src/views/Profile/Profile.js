@@ -30,7 +30,7 @@ const Profile = props => {
 
     return (
         <div className={classes.root}>
-            {isAuth ? (
+            {isAuth && localStorage.getItem('key') ? (
                 <Grid
                     container
                     spacing={4}

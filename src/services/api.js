@@ -29,6 +29,10 @@ export let validateAuth = new Promise((resolve) => {
 /**
  * FUNCIONES PARA DESPLEGABLES
  * **/
+export let getlist = new Promise((resolve, list) => {
+    if (localStorage.getItem('' + list))
+        resolve(localStorage.getItem('' + list))
+})
 export function getAccesoManguera() {
     return fetch(process.env.API_URL + `/api/v1/estacionamientos/get_accesos_manguera/`, {
         method: 'GET',

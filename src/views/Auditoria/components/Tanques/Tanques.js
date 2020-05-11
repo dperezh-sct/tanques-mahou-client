@@ -15,9 +15,10 @@ import {
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
+        width: '100%',
         flexDirection: 'column',
         justifyContent: 'space-aroud'
-    }
+    },
 
 }));
 

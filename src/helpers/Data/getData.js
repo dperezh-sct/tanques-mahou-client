@@ -20,7 +20,7 @@ const GetAccesoManguera = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("accesoManguera", json);
+            localStorage.setItem("accesoManguera", JSON.stringify(json));
             console.log("accesoManguera obtenido");
             console.log(json);
         })
@@ -34,7 +34,7 @@ const GetModeloTanque = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("modeloTanque", json);
+            localStorage.setItem("modeloTanque", JSON.stringify(json));
             console.log("modeloTanque obtenido");
             console.log(json);
         })
@@ -48,7 +48,7 @@ const GetAcabadoTanque = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("acabadoTanque", json);
+            localStorage.setItem("acabadoTanque", JSON.stringify(json));
             console.log("acabadoTanque obtenido");
             console.log(json);
         })
@@ -62,7 +62,7 @@ const GetModeloEnfriadorTanques = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("modeloEnfriadorTanques", json);
+            localStorage.setItem("modeloEnfriadorTanques", JSON.stringify(json));
             console.log("modeloEnfriadorTanques obtenido");
             console.log(json);
         })
@@ -76,7 +76,7 @@ const GetTipoSistemaTanques = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("tipoSistemaTanques", json);
+            localStorage.setItem("tipoSistemaTanques", JSON.stringify(json));
             console.log("tipoSistemaTanques obtenido");
             console.log(json);
         })
@@ -90,7 +90,7 @@ const GetEstructuraTanque = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("estructuraTanque", json);
+            localStorage.setItem("estructuraTanque", JSON.stringify(json));
             console.log("estructuraTanque obtenido");
             console.log(json);
         })
@@ -104,7 +104,7 @@ const GetModeloCompresor = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("modeloCompresor", json);
+            localStorage.setItem("modeloCompresor", JSON.stringify(json));
             console.log("modeloCompresor obtenido");
             console.log(json);
         })
@@ -118,7 +118,7 @@ const GetCategoriasDespacho = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("categoriasDespacho", json['results']);
+            localStorage.setItem("categoriasDespacho", JSON.stringify(json['results']));
             console.log("categoriasDespacho obtenido");
             console.log(json);
         })
@@ -132,7 +132,7 @@ const GetCodigoProductoDespacho = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("codigoProductoDespacho", json['results']);
+            localStorage.setItem("codigoProductoDespacho", JSON.stringify(json['results']));
             console.log("codigoProductoDespacho obtenido");
             console.log(json);
         })
@@ -146,7 +146,7 @@ const GetModeloColumnaDespacho = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("modeloColumnaDespacho", json['results']);
+            localStorage.setItem("modeloColumnaDespacho", JSON.stringify(json['results']));
             console.log("modeloColumnaDespacho obtenido");
             console.log(json);
         })
@@ -160,7 +160,7 @@ const GetAcabadoDespacho = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("acabadoDespacho", json['results']);
+            localStorage.setItem("acabadoDespacho", JSON.stringify(json['results']));
             console.log("acabadoDespacho obtenido");
             console.log(json);
         })
@@ -174,7 +174,7 @@ const GetModeloEnfriadorDespacho = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("modeloEnfriadorDespacho", json);
+            localStorage.setItem("modeloEnfriadorDespacho", JSON.stringify(json));
             console.log("modeloEnfriadorDespacho obtenido");
             console.log(json);
         })
@@ -188,7 +188,7 @@ const GetEmpresas = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("empresas", json);
+            localStorage.setItem("empresas", JSON.stringify(json));
             console.log("empresas obtenido");
             console.log(json);
         })

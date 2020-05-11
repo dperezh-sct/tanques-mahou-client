@@ -13,16 +13,12 @@ import PersonIcon from '@material-ui/icons/Person';
 import SyncIcon from '@material-ui/icons/Sync';
 import { ProfileNav } from './components';
 import { AuthContext } from '../../../contexts/AuthContext';
-import DeleteOutlineIcon from '@material-ui/icons/DeleteOutline';
 import { refresh } from '../../../helpers/Data/getData';
-import { clean } from '../../../helpers/Data/cleanData';
 
 import {
     Button,
     List,
-    Divider,
-    ListItem,
-    Avatar
+    ListItem
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
@@ -123,10 +119,13 @@ export default function SwipeableTemporaryDrawer() {
     const [state, setState] = useState(false);
     const { isAuth } = useContext(AuthContext);
     const toggleDrawer = (open) => event => {
-        if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
+        if (isAuth && localStorage.getItem('key')) {
+            if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+                return;
+            }
+            setState(open);
         }
-        setState(open);
+
     };
     const handleRefresh = () => {
         refresh();
@@ -136,7 +135,7 @@ export default function SwipeableTemporaryDrawer() {
 
     return (
         <div className={classes.root}>
-            {isAuth ? (
+            {isAuth && localStorage.getItem('key') ? (
                 <div className={classes.navBox}>
                     <Button
                         className={classes.NavButton}

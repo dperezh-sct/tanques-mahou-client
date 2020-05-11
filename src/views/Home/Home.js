@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, useContext, forwardRef } from 'react';
 import { NavLink as RouterLink, Redirect } from 'react-router-dom';
 
@@ -5,6 +6,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { AuthContext } from '../../contexts/AuthContext';
 import {
+  // eslint-disable-next-line no-unused-vars
   Paper,
   Button
 } from '@material-ui/core';
@@ -43,8 +45,8 @@ const Home = props => {
   const { isAuth } = useContext(AuthContext);
 
 
-  return (<div>
-    {isAuth ? (
+  return (
+    isAuth && localStorage.getItem('key') ? (
       <div className={classes.root}>
         <Button
           className={classes.menubutton}
@@ -62,9 +64,7 @@ const Home = props => {
           to={'/auditorias'}>
           Auditorias
       </Button>
-      </div>) : (<Redirect to="/login" />)}
-
-  </div>
+      </div>) : (<Redirect to="/login" />)
   );
 };
 

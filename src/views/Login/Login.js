@@ -178,6 +178,8 @@ const SignIn = props => {
         return response.json();
       })
       .then(json => {
+        console.log('json-login')
+        console.log(json)
         if (json["key"] != null) {
           localStorage.setItem("username", username);
           localStorage.setItem("key", json["key"]);

@@ -29,8 +29,8 @@ const Logout = props => {
   const classes = useStyles();
   useEffect(() => {
     logOut();
-    localStorage.clear();
     setIsAuth(false);
+    localStorage.clear();
   }, []);
 
   return (
