@@ -5,6 +5,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import DeleteIcon from '@material-ui/icons/Delete';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import { Camera } from '../../../../../../components';
+import { FormContext } from '../../../../../../contexts/FormContext';
+
 import {
     FormControl,
     TextField,
@@ -136,27 +138,17 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const modelosOp = [
-    'HORIZONTAL 250Lx630',
-    'HORIZONTAL 500Lx830',
-    'HORIZONTAL 500Lx700',
-    'HORIZONTAL 1000Lx830',
-    'VERTICAL 500Lx830',
-    'VERTICAL 500Lx860'
-];
-const acabadosOp = [
-    'INOX',
-    'COBRE REAL',
-    'COBRE PINTADO',
-    'GRIS',
-    'OTRO (Anotar en observaciones)'
-];
+
 const chapaOp = ['SI', 'NO'];
 
 const TanquesList = props => {
     /**STYLES */
     const { className, ...rest } = props;
     const classes = useStyles();
+    const [modelosOp, setModelosOp] = useState([]);
+    const [acabadosOp, setAcabadosOp] = useState([]);
+
+    //const { tanques, setTanques } = useContext(FormContext);
 
     const [modelos, setModelos] = useState([]);
     const handleChangeModelo = (event, id) => {
@@ -197,8 +189,9 @@ const TanquesList = props => {
     }
 
     useEffect(() => {
+        setModelosOp(JSON.parse(localStorage.getItem('modeloTanque')));
+        setAcabadosOp(JSON.parse(localStorage.getItem('acabadoTanque')));
     }, [tanques]);
-
 
     return (
         <div className={classes.root}>
