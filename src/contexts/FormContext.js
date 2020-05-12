@@ -68,7 +68,15 @@ export const FormProvider = ({ children }) => {
      * observaciones:''
      * } */
     /**DESPACHO*/
-    const [modulos, setModulos] = useState([])
+    const [modulos, setModulos] = useState([{
+        id: 0,
+        productos: [],
+        enfriadores: [],
+        fotoEnfriadorAdentro: null,
+        fotoFrontalExterior: null,
+        fotoLaterialIzq: null,
+        fotoLateralDer: null
+    }])
     /**modulo={
      * productos:[],
      * enfriadores:[],
