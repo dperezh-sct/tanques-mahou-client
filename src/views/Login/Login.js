@@ -1,39 +1,21 @@
 import React, { useState, useEffect, forwardRef, useContext } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import validate from 'validate.js';
 import { makeStyles } from '@material-ui/styles';
 import { logIn } from "../../services/api";
 import { refresh } from '../../helpers/Data/getData';
 import { AuthContext } from '../../contexts/AuthContext';
+import { UserContext } from '../../contexts/UserContext';
 import {
   Grid,
   Button,
-  IconButton,
   TextField,
   Typography,
   Snackbar,
-  CardMedia
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import { Alert } from '@material-ui/lab/';
 
-/** 
-const schema = {
-  username: {
-    presence: { allowEmpty: false, message: 'is required' },
-    username: true,
-    length: {
-      maximum: 10
-    }
-  },
-  password: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 128
-    }
-  }
-};*/
 const schema = {
   password: {
     presence: { allowEmpty: false, message: 'is required' },
@@ -127,6 +109,7 @@ const SignIn = props => {
 
   });
   const { isAuth, setIsAuth } = useContext(AuthContext);
+  const { empresa, setEmpresa } = useContext(UserContext);
 
   useEffect(() => {
     const errors = validate(formState.values, schema);
@@ -171,7 +154,7 @@ const SignIn = props => {
     }));
   };
 
-  const handleLogIn = event => {
+  const handleLogIn = (event) => {
     event.preventDefault();
     logIn(username, formState.values.password)
       .then(response => {
@@ -193,6 +176,8 @@ const SignIn = props => {
       .catch(error => {
         console.log("Error(sign-in):" + error.message);
       });
+
+
   };
 
   const hasError = field =>
@@ -287,19 +272,3 @@ SignIn.propTypes = {
 };
 
 export default SignIn;
-/**<TextField
-                className={classes.textField}
-                error={hasError('email')}
-                fullWidth
-                helperText={
-                  hasError('email') ? formState.errors.email[0] : null
-                }
-                label="Email address"
-                name="email"
-                onChange={handleChange}
-                type="text"
-                value={formState.values.email || ''}
-                variant="outlined"
-                id="outlined-required"
-
-              /> */

@@ -13,6 +13,7 @@ import LoginView from './views/Login';
 import HomeView from './views/Home';
 import ProfileView from './views/Profile';
 import { AuthProvider } from './contexts/AuthContext'
+import { UserProvider } from './contexts/UserContext'
 
 
 
@@ -23,17 +24,19 @@ export default class App extends Component {
   render() {
     return (
       <AuthProvider>
-        <ThemeProvider theme={theme}>
-          <Router history={browserHistory}>
-            <HeaderView />
-            <Route path="/login" component={LoginView} />
-            <Route path="/nueva-auditoria" component={AuditoriaView} />
-            <Route path="/auditorias" component={AuditoriasView} />
-            <Route path="/logout" component={LogoutView} />
-            <Route path="/profile" component={ProfileView} />
-            <Route exact path="/" component={HomeView} />
-          </Router>
-        </ThemeProvider>
+        <UserProvider>
+          <ThemeProvider theme={theme}>
+            <Router history={browserHistory}>
+              <HeaderView />
+              <Route path="/login" component={LoginView} />
+              <Route path="/nueva-auditoria" component={AuditoriaView} />
+              <Route path="/auditorias" component={AuditoriasView} />
+              <Route path="/logout" component={LogoutView} />
+              <Route path="/profile" component={ProfileView} />
+              <Route exact path="/" component={HomeView} />
+            </Router>
+          </ThemeProvider>
+        </UserProvider>
       </AuthProvider>
     );
   }

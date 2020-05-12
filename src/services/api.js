@@ -257,3 +257,12 @@ export function getEmpresas() {
         },
     ]*/
 }
+export function getEstablecimientos(search, type) {
+    return fetch(process.env.API_URL + '/api/v1/locales/filter/?' + type + '=' + search, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'token ' + localStorage.getItem('key')
+        }
+    })
+}

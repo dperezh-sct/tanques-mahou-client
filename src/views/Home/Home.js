@@ -4,7 +4,10 @@ import { NavLink as RouterLink, Redirect } from 'react-router-dom';
 
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import CircularProgress from '@material-ui/core/CircularProgress';
+
 import { AuthContext } from '../../contexts/AuthContext';
+import { UserContext } from '../../contexts/UserContext';
 import {
   // eslint-disable-next-line no-unused-vars
   Paper,
@@ -43,11 +46,22 @@ const Home = props => {
   const { className, ...rest } = props
   const classes = useStyles()
   const { isAuth } = useContext(AuthContext);
+  const { empresa, setEmpresa, state, setState } = useContext(UserContext);
+
+  useEffect(() => {
+    if (isAuth && localStorage.getItem('key') && localStorage.getItem('empresa')) {
+      let list = JSON.parse(localStorage.getItem('empresa'));
+      setEmpresa(list[0])
+    }
+    if (localStorage.getItem('dataState')) {
+      setState(localStorage.getItem('dataState'))
+    }
+  }, [state]);
 
 
   return (
     isAuth && localStorage.getItem('key') ? (
-      <div className={classes.root}>
+      state ? (<div className={classes.root} >
         <Button
           className={classes.menubutton}
           variant="contained"
@@ -64,7 +78,10 @@ const Home = props => {
           to={'/auditorias'}>
           Auditorias
       </Button>
-      </div>) : (<Redirect to="/login" />)
+      </div >) : (<CircularProgress disableShrink />)
+    ) : (
+        <Redirect to="/login" />
+      )
   );
 };
 

@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import { UserContext } from '../../../../contexts/UserContext';
 import {
   Card,
   CardHeader,
@@ -19,8 +20,10 @@ const useStyles = makeStyles(() => ({
 
 const AccountDetails = props => {
   const { className, ...rest } = props;
-
   const classes = useStyles();
+
+  const { nombre, setNombre, empresa, setEmpresa } = useContext(UserContext);
+
 
   const [values, setValues] = useState({
     firstName: 'Carlos',

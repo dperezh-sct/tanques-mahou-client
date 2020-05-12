@@ -188,8 +188,8 @@ const GetEmpresas = () => {
             return response.json();
         })
         .then(json => {
-            localStorage.setItem("empresas", JSON.stringify(json));
-            console.log("empresas obtenido");
+            localStorage.setItem("empresa", JSON.stringify(json['results']));
+            console.log("empresa obtenido");
             console.log(json);
         })
         .catch(error => {
@@ -210,4 +210,5 @@ export function refresh() {
     GetAcabadoDespacho();
     GetModeloEnfriadorDespacho();
     GetEmpresas();
+    localStorage.setItem("dataState", true);
 };

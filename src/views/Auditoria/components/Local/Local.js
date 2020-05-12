@@ -1,9 +1,15 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link as RouterLink, withRouter } from 'react-router-dom';
+
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
+import Autocomplete from '@material-ui/lab/Autocomplete';
+
+import { getEstablecimientos } from '../../../../services/api';
+import { FormContext } from '../../../../contexts/FormContext';
+import { UserContext } from '../../../../contexts/UserContext';
 import Section from '../../../../components/Section';
 import Camera from '../../../../components/Camera';
+
 import {
   Grid,
   TextField,
@@ -15,7 +21,6 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from '@material-ui/pickers';
-import { FormContext } from '../../../../contexts/FormContext';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -79,26 +84,35 @@ const useStyles = makeStyles(theme => ({
 
 }));
 
-const empresas = localStorage.getItem('empresas')
 
 const Local = props => {
   /**STYLES */
   const { className, ...rest } = props
   const classes = useStyles()
 
+  const [value, setValue] = useState('');
+  const [inputValue, setInputValue] = useState('');
+
+
+  const { empresa } = useContext(UserContext);
+  const [establecimientos, setEstablecimientos] = useState([]);
   const { nombreEstab, setNombreEstab, fotoLocal, setFotoLocal, nombreEmpresa, setNombreEmpresa,
     codigoCliente, setCodigoCliente, nifCif, setNifCif, empresaSTP, setEmpresaSTP, direccion,
     setDireccion, fechaVisita, setFechaVisita, fechaAlta, setFechaAlta, ciudad, setCiudad,
     cp, setCP, provincia, setProvincia, telefono, setTelefono, correo, setCorreo } = useContext(FormContext);
 
-  const handleNombreEstab = (event) => {
-    setNombreEstab(event.target.value);
+  const handleNombreEstab = (event, newValue) => {
+    setNombreEstab(newValue);
+  };
+  const handleAutocomplete = (event, newValue) => {
+    GetEstablecimientos(event.target.value, 'search')
+    setValue(newValue)
   };
   const handleFotoLocal = (file) => {
     setFotoLocal(file);
   };
-  const handleNombreEmpresa = (event) => {
-    setNombreEmpresa(event.target.value);
+  const handleNombreEmpresa = (event, newValue) => {
+    setNombreEmpresa(newValue);
   };
   const handleCodigoCliente = (event) => {
     setCodigoCliente(event.target.value);
@@ -134,6 +148,22 @@ const Local = props => {
     setCorreo(event.target.value);
   };
 
+  const GetEstablecimientos = (typing, search) => {
+    getEstablecimientos(typing, search)
+      .then(response => {
+        return response.json();
+      })
+      .then(json => {
+        setEstablecimientos(json)
+      })
+      .catch(error => {
+        console.log("Error(empresas):" + error.message);
+      });
+  };
+
+  useEffect(() => {
+    console.log(nombreEstab)
+  }, [empresa, establecimientos, nombreEstab]);
 
   return (
     <div className={classes.root}>
@@ -141,14 +171,30 @@ const Local = props => {
         <FormControl variant="outlined" className={classes.formControl}>
 
           <div className={classes.row}>
-            <TextField
-              id="outlined-secondary"
-              label="Nombre establecimiento"
-              variant="outlined"
+            <Autocomplete
+              disableClearable
+              noOptionsText="No existe"
+              id="establecimiento-autocomplete"
               className={classes.inputTextGrow4}
-              value={nombreEstab}
-              onChange={handleNombreEstab}
+              options={establecimientos.map((establecimiento) => establecimiento)}
+              onChange={(event, newValue) => {
+                setNombreEstab(newValue)
+              }}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Nombre establecimiento"
+                  margin="normal"
+                  variant="outlined"
+                  value={nombreEstab}
+                  InputProps={{ ...params.InputProps }}
+                  onChange={(event, newValue) => {
+                    handleAutocomplete(event, newValue)
+                  }}
+                />
+              )}
             />
+
           </div>
           <div className={classes.row}>
             <Camera name='Foto del local' />
@@ -156,11 +202,12 @@ const Local = props => {
           <div className={classes.row}>
             <TextField
               id="outlined-secondary"
-              label="Nombre empresa"
+              label='Nombre de empresa'
               variant="outlined"
               className={classes.inputTextGrow4}
-              value={nombreEmpresa}
-              onChange={handleNombreEmpresa}
+              value={empresa.nombre}
+              onChange={(e, newValue) => handleNombreEmpresa(e, newValue)}
+              disabled
             />
           </div>
           <div className={classes.row}>
@@ -297,3 +344,4 @@ Local.propTypes = {
 };
 
 export default Local;
+
