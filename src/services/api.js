@@ -2,60 +2,58 @@
  * FUNCIONES PARA LA SESION
  * **/
 export function logIn(username, password) {
-    return fetch(process.env.API_URL + `/auth/login/`, {
-        method: 'POST',
-        body: JSON.stringify({
-            username,
-            password
-        }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
+	return fetch(process.env.API_URL + `/auth/login/`, {
+		method: 'POST',
+		body: JSON.stringify({
+			username,
+			password
+		}),
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
 }
 export function logOut() {
-    return fetch(process.env.API_URL + `/auth/logout/`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
+	return fetch(process.env.API_URL + `/auth/logout/`, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
 }
 export let validateAuth = new Promise((resolve) => {
-    if (localStorage.getItem('key'))
-        resolve(localStorage.getItem('key'))
-})
+	if (localStorage.getItem('key')) resolve(localStorage.getItem('key'));
+});
 /**
  * FUNCIONES PARA DESPLEGABLES
  * **/
 export let getlist = new Promise((resolve, list) => {
-    if (localStorage.getItem('' + list))
-        resolve(localStorage.getItem('' + list))
-})
+	if (localStorage.getItem('' + list)) resolve(localStorage.getItem('' + list));
+});
 export function getAccesoManguera() {
-    return fetch(process.env.API_URL + `/api/v1/estacionamientos/get_accesos_manguera/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/estacionamientos/get_accesos_manguera/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
     		"puerta principal",
     		"puerta en almacén",
     		"registro",
     		"otro"]*/
 }
 export function getModeloTanque() {
-    return fetch(process.env.API_URL + `/api/v1/tanques/get_modelos/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/tanques/get_modelos/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
     "HORIZONTAL 250Lx630",
     "HORIZONTAL 500Lx830",
     "HORIZONTAL 500Lx700",
@@ -64,14 +62,14 @@ export function getModeloTanque() {
     "VERTICAL 500Lx860"]*/
 }
 export function getAcabadoTanque() {
-    return fetch(process.env.API_URL + `/api/v1/tanques/get_acabados/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/tanques/get_acabados/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
     "INOX",
     "COBRE REAL",
     "COBRE PINTADO",
@@ -79,14 +77,14 @@ export function getAcabadoTanque() {
     "OTRO"]*/
 }
 export function getModeloEnfriadorTanques() {
-    return fetch(process.env.API_URL + `/api/v1/tanques/enfriadores_tanques/get_modelos_enfriadores/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/tanques/enfriadores_tanques/get_modelos_enfriadores/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
     "V100",
     "V200",
     "V400",
@@ -94,26 +92,26 @@ export function getModeloEnfriadorTanques() {
     "H200"]*/
 }
 export function getTipoSistemaTanques() {
-    return fetch(process.env.API_URL + `/api/v1/tanques/get_tipos/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/tanques/get_tipos/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
     "Neumático",
     "Electrónico"]*/
 }
 export function getEstructuraTanque() {
-    return fetch(process.env.API_URL + `/api/v1/tanques/get_estructuras/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/tanques/get_estructuras/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
     "Especial",
     "Estándar horizontal",
     "Estándar vertical",
@@ -126,14 +124,14 @@ export function getEstructuraTanque() {
     "OTRO"]*/
 }
 export function getModeloCompresor() {
-    return fetch(process.env.API_URL + `/api/v1/tanques/get_modelos_compresores/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/tanques/get_modelos_compresores/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
     "20 L",
     "50 L",
     "120 L",
@@ -141,14 +139,14 @@ export function getModeloCompresor() {
     "OTRO"]*/
 }
 export function getCategoriasDespacho() {
-    return fetch(process.env.API_URL + `/api/v1/despachos/categorias/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/despachos/categorias/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
         {
             "id": 20,
             "nombre": "PRODUCTOS TANQUE"
@@ -157,14 +155,14 @@ export function getCategoriasDespacho() {
     ]*/
 }
 export function getCodigoProductoDespacho() {
-    return fetch(process.env.API_URL + `/api/v1/despachos/productos_base/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/despachos/productos_base/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
         {
             "id": 174,
             "categoria_instalacion_read": "PRODUCTOS TANQUE",
@@ -176,14 +174,14 @@ export function getCodigoProductoDespacho() {
     ]*/
 }
 export function getModeloColumnaDespacho() {
-    return fetch(process.env.API_URL + `/api/v1/despachos/productos_despacho/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/despachos/productos_despacho/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
         {
             "id": 1268,
             "columnas": [
@@ -208,14 +206,14 @@ export function getModeloColumnaDespacho() {
     ]*/
 }
 export function getAcabadoDespacho() {
-    return fetch(process.env.API_URL + `/api/v1/despachos/acabados/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/despachos/acabados/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
         {
             "id": 16,
             "nombre": "ROJO"
@@ -224,14 +222,14 @@ export function getAcabadoDespacho() {
     ]*/
 }
 export function getModeloEnfriadorDespacho() {
-    return fetch(process.env.API_URL + `/api/v1/despachos/enfriadores_despacho/get_modelos_enfriadores_despacho/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/despachos/enfriadores_despacho/get_modelos_enfriadores_despacho/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
     "V50",
     "V75",
     "V100",
@@ -242,14 +240,14 @@ export function getModeloEnfriadorDespacho() {
 }
 /**LISTADDOS DE AUTOCOMPLETADO */
 export function getEmpresas() {
-    return fetch(process.env.API_URL + `/api/v1/locales/empresas_stp/`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
-    /**response: [
+	return fetch(process.env.API_URL + `/api/v1/locales/empresas_stp/`, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
        {
             "id": 96,
             "nombre": "NAVAR5STPTECNIC, S.L.",
@@ -258,11 +256,20 @@ export function getEmpresas() {
     ]*/
 }
 export function getEstablecimientos(search, type) {
-    return fetch(process.env.API_URL + '/api/v1/locales/filter/?' + type + '=' + search, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': 'token ' + localStorage.getItem('key')
-        }
-    })
+	return fetch(process.env.API_URL + '/api/v1/locales/filter/?' + type + '=' + search, {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+}
+export function getDatosEstablecimiento(id) {
+	return fetch(process.env.API_URL + '/api/v1/locales/' + id + '/', {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
 }
