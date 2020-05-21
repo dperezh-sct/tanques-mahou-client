@@ -22,6 +22,25 @@ export function logOut() {
 		}
 	});
 }
+export function getUserData(id) {
+	return fetch(process.env.API_URL + '/api/v1/formularios/tecnicos/' + id + '/', {
+		method: 'GET',
+		headers: {
+			'Content-Type': 'application/json',
+			Authorization: 'token ' + localStorage.getItem('key')
+		}
+	});
+	/**response: [
+    		"id": 492,
+    "empresa_read": "BCN TOT VENDING",
+    "last_login": null,
+    "username": "1",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "cod_uo": 1,
+    "empresa": 49]*/
+}
 export let validateAuth = new Promise((resolve) => {
 	if (localStorage.getItem('key')) resolve(localStorage.getItem('key'));
 });

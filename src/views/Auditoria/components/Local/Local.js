@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useCallback } from 'react';
 
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
@@ -137,9 +137,11 @@ const Local = (props) => {
 	const handleDireccion = (event) => {
 		setDireccion(event.target.value);
 	};
-	const handleDateChangeVisita = (date) => {
-		setFechaVisita(new Date(date));
-	};
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const handleDateChangeVisita = useCallback(() => {
+		let d = new Date();
+		setFechaVisita(new Date(d));
+	});
 	const handleDateChangeAlta = (date) => {
 		setFechaAlta(new Date(date));
 	};
@@ -198,29 +200,17 @@ const Local = (props) => {
 			});
 	};
 
-	useEffect(() => {}, [
-		empresa,
-		establecimientos,
-		nombreEstab,
-		fotoLocal,
-		nombreEmpresa,
-		codigoCliente,
-		nifCif,
-		empresaSTP,
-		direccion,
-		fechaVisita,
-		fechaAlta,
-		ciudad,
-		cp,
-		provincia,
-		telefono,
-		correo
-	]);
+	useEffect(() => {
+		handleDateChangeVisita();
+	}, []);
 
 	return (
 		<div className={classes.root}>
 			<Section title="Datos del local">
 				<FormControl variant="outlined" className={classes.formControl}>
+					<div className={classes.row}>
+						<Camera name="Foto de fachada del local" />
+					</div>
 					<div className={classes.row}>
 						<Autocomplete
 							disableClearable
@@ -252,17 +242,13 @@ const Local = (props) => {
 						/>
 					</div>
 					<div className={classes.row}>
-						<Camera name="Foto del local" />
-					</div>
-					<div className={classes.row}>
 						<TextField
 							id="outlined-secondary"
 							label="Nombre de empresa"
 							variant="outlined"
 							className={classes.inputTextGrow4}
-							value={empresa.nombre}
-							onChange={(e, newValue) => handleNombreEmpresa(e, newValue)}
-							disabled
+							value={empresaSTP}
+							onChange={handleEmpresaSTP}
 						/>
 					</div>
 					<div className={classes.row}>
@@ -286,21 +272,22 @@ const Local = (props) => {
 					<div className={classes.row}>
 						<TextField
 							id="outlined-secondary"
-							label="Empresa STP"
-							variant="outlined"
-							className={classes.inputTextGrow4}
-							value={empresaSTP}
-							onChange={handleEmpresaSTP}
-						/>
-					</div>
-					<div className={classes.row}>
-						<TextField
-							id="outlined-secondary"
 							label="Dirección"
 							variant="outlined"
 							className={classes.inputTextGrow4}
 							value={direccion}
 							onChange={handleDireccion}
+						/>
+					</div>
+					<div className={classes.row}>
+						<TextField
+							id="outlined-secondary"
+							label="Empresa STP"
+							variant="outlined"
+							className={classes.inputTextGrow4}
+							value={empresa}
+							onChange={(e, newValue) => handleNombreEmpresa(e, newValue)}
+							disabled
 						/>
 					</div>
 					<div className={classes.row}>
@@ -314,10 +301,7 @@ const Local = (props) => {
 								margin="normal"
 								label="Fecha de visita"
 								value={fechaVisita}
-								onChange={handleDateChangeVisita}
-								KeyboardButtonProps={{
-									'aria-label': 'change date'
-								}}
+								disabled
 							/>
 						</MuiPickersUtilsProvider>
 					</div>
