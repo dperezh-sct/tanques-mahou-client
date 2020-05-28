@@ -130,32 +130,32 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const modelosOp = [ 'V50', 'V75', 'V100', 'V200', 'V400', 'H100', 'H200' ];
+const modelosOp = ['V50', 'V75', 'V100', 'V200', 'V400', 'H100', 'H200'];
 
 const EnfriadoresTanques = (props) => {
 	/**STYLES */
 	const { className, ...rest } = props;
 	const classes = useStyles();
 
-	const [ modelos, setModelos ] = useState([]);
+	const [modelos, setModelos] = useState([]);
 	const handleChangeModelo = (event, id) => {
-		let newmodelos = [ ...modelos ];
+		let newmodelos = [...modelos];
 		newmodelos[id] = event.target.value;
 		setModelos(newmodelos);
 	};
-	const [ enfriadores, setEnfriadores ] = useState([ 0 ]);
+	const [enfriadores, setEnfriadores] = useState([0]);
 	const handleAdd = () => {
-		let newenfriadores = [ ...enfriadores ];
-		let init = [ 0 ];
+		let newenfriadores = [...enfriadores];
+		let init = [0];
 		if (newenfriadores.length == 0) {
-			newenfriadores = [ ...init ];
+			newenfriadores = [...init];
 		} else {
 			newenfriadores.push(newenfriadores[newenfriadores.length - 1] + 1);
 		}
 		setEnfriadores(newenfriadores);
 	};
 	const handleDelete = (id) => {
-		let temp = [ ...enfriadores ];
+		let temp = [...enfriadores];
 		let newenfriadores = [];
 		newenfriadores = temp.filter((e) => {
 			return e != id;
@@ -163,7 +163,7 @@ const EnfriadoresTanques = (props) => {
 		setEnfriadores(newenfriadores);
 	};
 
-	useEffect(() => {}, [ enfriadores ]);
+	useEffect(() => { }, [enfriadores]);
 
 	return (
 		<div className={classes.root}>
@@ -181,78 +181,78 @@ const EnfriadoresTanques = (props) => {
 					</Typography>
 				</div>
 			) : (
-				<div>
-					{enfriadores.map((enfriador) => (
-						<ExpansionPanel key={enfriadores.indexOf(enfriador)}>
-							<ExpansionPanelSummary
-								expandIcon={<ExpandMoreIcon />}
-								aria-controls="panel1a-content"
-								id="panel1a-header"
-							>
-								<div className={classes.rowCenter}>
-									<IconButton
-										aria-label="delete"
-										className={classes.delete}
-										onClick={(event) => {
-											event.stopPropagation(), handleDelete(enfriador);
-										}}
-										onFocus={(event) => event.stopPropagation()}
-									>
-										<DeleteIcon fontSize="small" />
-									</IconButton>
-									<Typography align="center" className={classes.headingProduct}>
-										Enfriador {'' + (enfriador + 1)}
-									</Typography>
-								</div>
-							</ExpansionPanelSummary>
-							<ExpansionPanelDetails>
-								<div className={classes.form}>
-									<div className={classes.row}>
-										<TextField
-											id="outlined-multiline-static"
-											label="Numero de serie"
-											variant="outlined"
-											disabled
-											value={props.id}
-											className={classes.inputTextGrow4}
-										/>
+					<div>
+						{enfriadores.map((enfriador) => (
+							<ExpansionPanel key={enfriadores.indexOf(enfriador)}>
+								<ExpansionPanelSummary
+									expandIcon={<ExpandMoreIcon />}
+									aria-controls="panel1a-content"
+									id="panel1a-header"
+								>
+									<div className={classes.rowCenter}>
+										<IconButton
+											aria-label="delete"
+											className={classes.delete}
+											onClick={(event) => {
+												event.stopPropagation(), handleDelete(enfriador);
+											}}
+											onFocus={(event) => event.stopPropagation()}
+										>
+											<DeleteIcon fontSize="small" />
+										</IconButton>
+										<Typography align="center" className={classes.headingProduct}>
+											Enfriador {'' + (enfriador + 1)}
+										</Typography>
 									</div>
-									<div className={classes.row}>
-										<FormControl variant="outlined" className={classes.inputTextGrow4}>
-											<InputLabel>Modelo</InputLabel>
-											<Select
-												value={modelos[enfriadores.indexOf(enfriador)]}
-												onChange={(event) =>
-													handleChangeModelo(event, enfriadores.indexOf(enfriador))}
-												label="Codigo de producto"
-											>
-												{modelosOp.map((mod) => (
-													<MenuItem key={modelosOp.indexOf(mod)} value={mod}>
-														{mod}
-													</MenuItem>
-												))}
-											</Select>
-										</FormControl>
+								</ExpansionPanelSummary>
+								<ExpansionPanelDetails>
+									<div className={classes.form}>
+										<div className={classes.row}>
+											<Camera name="Foto de enfriador" />
+										</div>
+										<div className={classes.row}>
+											<TextField
+												id="outlined-multiline-static"
+												label="Numero de serie"
+												variant="outlined"
+												disabled
+												value={props.id}
+												className={classes.inputTextGrow4}
+											/>
+										</div>
+										<div className={classes.row}>
+											<FormControl variant="outlined" className={classes.inputTextGrow4}>
+												<InputLabel>Modelo</InputLabel>
+												<Select
+													value={modelos[enfriadores.indexOf(enfriador)]}
+													onChange={(event) =>
+														handleChangeModelo(event, enfriadores.indexOf(enfriador))}
+													label="Codigo de producto"
+												>
+													{modelosOp.map((mod) => (
+														<MenuItem key={modelosOp.indexOf(mod)} value={mod}>
+															{mod}
+														</MenuItem>
+													))}
+												</Select>
+											</FormControl>
+										</div>
+										<div className={classes.row}>
+											<TextField
+												id="outlined-multiline-static"
+												label="Observaciones"
+												multiline
+												rows="3"
+												variant="outlined"
+												className={classes.inputTextGrow4}
+											/>
+										</div>
 									</div>
-									<div className={classes.row}>
-										<Camera name="Foto de enfriador" />
-									</div>
-									<div className={classes.row}>
-										<TextField
-											id="outlined-multiline-static"
-											label="Observaciones"
-											multiline
-											rows="3"
-											variant="outlined"
-											className={classes.inputTextGrow4}
-										/>
-									</div>
-								</div>
-							</ExpansionPanelDetails>
-						</ExpansionPanel>
-					))}
-				</div>
-			)}
+								</ExpansionPanelDetails>
+							</ExpansionPanel>
+						))}
+					</div>
+				)}
 		</div>
 	);
 };

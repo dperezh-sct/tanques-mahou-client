@@ -132,48 +132,48 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-const chapaOp = [ 'SI', 'NO' ];
+const chapaOp = ['SI', 'NO'];
 
 const TanquesList = (props) => {
 	/**STYLES */
 	const { className, ...rest } = props;
 	const classes = useStyles();
-	const [ modelosOp, setModelosOp ] = useState([]);
-	const [ acabadosOp, setAcabadosOp ] = useState([]);
+	const [modelosOp, setModelosOp] = useState([]);
+	const [acabadosOp, setAcabadosOp] = useState([]);
 
 	//const { tanques, setTanques } = useContext(FormContext);
 
-	const [ modelos, setModelos ] = useState([]);
+	const [modelos, setModelos] = useState([]);
 	const handleChangeModelo = (event, id) => {
-		let newmodelos = [ ...modelos ];
+		let newmodelos = [...modelos];
 		newmodelos[id] = event.target.value;
 		setModelos(newmodelos);
 	};
-	const [ acabados, setAcabados ] = useState([]);
+	const [acabados, setAcabados] = useState([]);
 	const handleChangeAcabados = (event, id) => {
-		let newacabados = [ ...acabados ];
+		let newacabados = [...acabados];
 		newacabados[id] = event.target.value;
 		setAcabados(newacabados);
 	};
-	const [ chapas, setChapas ] = useState([]);
+	const [chapas, setChapas] = useState([]);
 	const handleChangeChapas = (event, id) => {
-		let newchapas = [ ...chapas ];
+		let newchapas = [...chapas];
 		newchapas[id] = event.target.value;
 		setChapas(newchapas);
 	};
-	const [ tanques, setTanques ] = useState([ 0 ]);
+	const [tanques, setTanques] = useState([0]);
 	const handleAdd = () => {
-		let newtanques = [ ...tanques ];
-		let init = [ 0 ];
+		let newtanques = [...tanques];
+		let init = [0];
 		if (newtanques.length == 0) {
-			newtanques = [ ...init ];
+			newtanques = [...init];
 		} else {
 			newtanques.push(newtanques[newtanques.length - 1] + 1);
 		}
 		setTanques(newtanques);
 	};
 	const handleDelete = (id) => {
-		let temp = [ ...tanques ];
+		let temp = [...tanques];
 		let newtanques = [];
 		newtanques = temp.filter((e) => {
 			return e != id;
@@ -186,7 +186,7 @@ const TanquesList = (props) => {
 			setModelosOp(JSON.parse(localStorage.getItem('modeloTanque')));
 			setAcabadosOp(JSON.parse(localStorage.getItem('acabadoTanque')));
 		},
-		[ tanques ]
+		[tanques]
 	);
 
 	return (
@@ -205,108 +205,108 @@ const TanquesList = (props) => {
 					</Typography>
 				</div>
 			) : (
-				<div>
-					{tanques.map((tanque) => (
-						<ExpansionPanel key={tanques.indexOf(tanque)}>
-							<ExpansionPanelSummary
-								expandIcon={<ExpandMoreIcon />}
-								aria-controls="panel1a-content"
-								id="panel1a-header"
-							>
-								<div className={classes.rowCenter}>
-									<IconButton
-										aria-label="delete"
-										className={classes.delete}
-										onClick={(event) => {
-											event.stopPropagation(), handleDelete(tanque);
-										}}
-										onFocus={(event) => event.stopPropagation()}
-									>
-										<DeleteIcon fontSize="small" />
-									</IconButton>
-									<Typography align="center" className={classes.headingProduct}>
-										Tanque {'' + (tanque + 1)}
-									</Typography>
-								</div>
-							</ExpansionPanelSummary>
-							<ExpansionPanelDetails>
-								<div className={classes.form}>
-									<div className={classes.row}>
-										<TextField
-											id="outlined-multiline-static"
-											label="Número de serie"
-											variant="outlined"
-											className={classes.inputTextGrow4}
-										/>
+					<div>
+						{tanques.map((tanque) => (
+							<ExpansionPanel key={tanques.indexOf(tanque)}>
+								<ExpansionPanelSummary
+									expandIcon={<ExpandMoreIcon />}
+									aria-controls="panel1a-content"
+									id="panel1a-header"
+								>
+									<div className={classes.rowCenter}>
+										<IconButton
+											aria-label="delete"
+											className={classes.delete}
+											onClick={(event) => {
+												event.stopPropagation(), handleDelete(tanque);
+											}}
+											onFocus={(event) => event.stopPropagation()}
+										>
+											<DeleteIcon fontSize="small" />
+										</IconButton>
+										<Typography align="center" className={classes.headingProduct}>
+											Tanque {'' + (tanque + 1)}
+										</Typography>
 									</div>
-									<div className={classes.row}>
-										<FormControl variant="outlined" className={classes.inputTextGrow4}>
-											<InputLabel>Modelo</InputLabel>
-											<Select
-												value={modelos[tanques.indexOf(tanque)]}
-												onChange={(event) => handleChangeModelo(event, tanques.indexOf(tanque))}
-												label="Codigo de producto"
-											>
-												{modelosOp.map((mod) => (
-													<MenuItem key={modelosOp.indexOf(mod)} value={mod}>
-														{mod}
-													</MenuItem>
-												))}
-											</Select>
-										</FormControl>
+								</ExpansionPanelSummary>
+								<ExpansionPanelDetails>
+									<div className={classes.form}>
+										<div className={classes.row}>
+											<Camera name="Foto de tanque" />
+										</div>
+										<div className={classes.row}>
+											<TextField
+												id="outlined-multiline-static"
+												label="Número de serie"
+												variant="outlined"
+												className={classes.inputTextGrow4}
+											/>
+										</div>
+										<div className={classes.row}>
+											<FormControl variant="outlined" className={classes.inputTextGrow4}>
+												<InputLabel>Modelo</InputLabel>
+												<Select
+													value={modelos[tanques.indexOf(tanque)]}
+													onChange={(event) => handleChangeModelo(event, tanques.indexOf(tanque))}
+													label="Codigo de producto"
+												>
+													{modelosOp.map((mod) => (
+														<MenuItem key={modelosOp.indexOf(mod)} value={mod}>
+															{mod}
+														</MenuItem>
+													))}
+												</Select>
+											</FormControl>
+										</div>
+										<div className={classes.row}>
+											<FormControl variant="outlined" className={classes.inputTextGrow4}>
+												<InputLabel>Acabado</InputLabel>
+												<Select
+													value={acabados[tanques.indexOf(tanque)]}
+													onChange={(event) =>
+														handleChangeAcabados(event, tanques.indexOf(tanque))}
+													label="Codigo de producto"
+												>
+													{acabadosOp.map((acab) => (
+														<MenuItem key={acabadosOp.indexOf(acab)} value={acab}>
+															{acab}
+														</MenuItem>
+													))}
+												</Select>
+											</FormControl>
+										</div>
+										<div className={classes.row}>
+											<FormControl variant="outlined" className={classes.inputTextGrow4}>
+												<InputLabel>Chapa</InputLabel>
+												<Select
+													value={chapas[tanques.indexOf(tanque)]}
+													onChange={(event) => handleChangeChapas(event, tanques.indexOf(tanque))}
+													label="Codigo de producto"
+												>
+													{chapaOp.map((chapa) => (
+														<MenuItem key={chapaOp.indexOf(chapa)} value={chapa}>
+															{chapa}
+														</MenuItem>
+													))}
+												</Select>
+											</FormControl>
+										</div>
+										<div className={classes.row}>
+											<TextField
+												id="outlined-multiline-static"
+												label="Observaciones"
+												multiline
+												rows="3"
+												variant="outlined"
+												className={classes.inputTextGrow4}
+											/>
+										</div>
 									</div>
-									<div className={classes.row}>
-										<FormControl variant="outlined" className={classes.inputTextGrow4}>
-											<InputLabel>Acabado</InputLabel>
-											<Select
-												value={acabados[tanques.indexOf(tanque)]}
-												onChange={(event) =>
-													handleChangeAcabados(event, tanques.indexOf(tanque))}
-												label="Codigo de producto"
-											>
-												{acabadosOp.map((acab) => (
-													<MenuItem key={acabadosOp.indexOf(acab)} value={acab}>
-														{acab}
-													</MenuItem>
-												))}
-											</Select>
-										</FormControl>
-									</div>
-									<div className={classes.row}>
-										<FormControl variant="outlined" className={classes.inputTextGrow4}>
-											<InputLabel>Chapa</InputLabel>
-											<Select
-												value={chapas[tanques.indexOf(tanque)]}
-												onChange={(event) => handleChangeChapas(event, tanques.indexOf(tanque))}
-												label="Codigo de producto"
-											>
-												{chapaOp.map((chapa) => (
-													<MenuItem key={chapaOp.indexOf(chapa)} value={chapa}>
-														{chapa}
-													</MenuItem>
-												))}
-											</Select>
-										</FormControl>
-									</div>
-									<div className={classes.row}>
-										<Camera name="Foto de tanque" />
-									</div>
-									<div className={classes.row}>
-										<TextField
-											id="outlined-multiline-static"
-											label="Observaciones"
-											multiline
-											rows="3"
-											variant="outlined"
-											className={classes.inputTextGrow4}
-										/>
-									</div>
-								</div>
-							</ExpansionPanelDetails>
-						</ExpansionPanel>
-					))}
-				</div>
-			)}
+								</ExpansionPanelDetails>
+							</ExpansionPanel>
+						))}
+					</div>
+				)}
 		</div>
 	);
 };

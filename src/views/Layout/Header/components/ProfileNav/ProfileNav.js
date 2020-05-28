@@ -17,7 +17,7 @@ const ProfileNav = (props) => {
 	const classes = useStyles();
 	const { email, firstName, lastName } = useContext(UserContext);
 
-	useEffect(() => {}, [ email, firstName, lastName ]);
+	useEffect(() => { }, [email, firstName, lastName]);
 
 	return (
 		<div className={classes.root}>
@@ -29,7 +29,7 @@ const ProfileNav = (props) => {
 					<Button to="/profile" component={CustomRouterLink} className={classes.avatar}>
 						<Avatar alt="Remy Sharp" className={classes.large} src="/images/avatar_7.png" />
 					</Button>
-					<Typography className={classes.title}>Técnico</Typography>
+					<Typography className={classes.title}>Técnico {localStorage.getItem('username')}</Typography>
 					<Typography className={classes.name}>{firstName + '' + lastName}</Typography>
 					<Typography className={classes.email}>{email}</Typography>
 				</Grid>

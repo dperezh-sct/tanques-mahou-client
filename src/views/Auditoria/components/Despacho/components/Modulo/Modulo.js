@@ -135,22 +135,22 @@ const Modulo = (props) => {
 	const { className, ...rest } = props;
 	const classes = useStyles();
 
-	const [ botellaCo2, setBotellaCo2 ] = useState('');
-	const [ cadenaCo2, setCadenaCo2 ] = useState('');
-	const [ valbula, setValbula ] = useState('');
-	const [ moduls, setModuls ] = useState([ 0 ]);
+	const [botellaCo2, setBotellaCo2] = useState('');
+	const [cadenaCo2, setCadenaCo2] = useState('');
+	const [valbula, setValbula] = useState('');
+	const [moduls, setModuls] = useState([0]);
 	const handleAdd = () => {
-		let newmoduls = [ ...moduls ];
-		let init = [ 0 ];
+		let newmoduls = [...moduls];
+		let init = [0];
 		if (newmoduls.length == 0) {
-			newmoduls = [ ...init ];
+			newmoduls = [...init];
 		} else {
 			newmoduls.push(newmoduls[newmoduls.length - 1] + 1);
 		}
 		setModuls(newmoduls);
 	};
 	const handleDelete = (id) => {
-		let temp = [ ...moduls ];
+		let temp = [...moduls];
 		let newmoduls = [];
 		newmoduls = temp.filter((e) => {
 			return e != id;
@@ -167,7 +167,7 @@ const Modulo = (props) => {
 		setValbula(event.target.value);
 	};
 
-	useEffect(() => {}, [ moduls ]);
+	useEffect(() => { }, [moduls]);
 
 	return (
 		<div>
@@ -214,6 +214,9 @@ const Modulo = (props) => {
 							<Productos />
 							<div className={classes.row}>
 								<Camera name="Foto de FRONTAL EXTERIOR" />
+							</div>
+							<div className={classes.row}>
+								<Camera name="Foto de LATERAL EXTERIOR" />
 							</div>
 							<div className={classes.row}>
 								<Camera name="Foto de botella CO2" />
@@ -272,9 +275,6 @@ const Modulo = (props) => {
 							</div>
 							<div className={classes.row}>
 								<Camera name="Foto de enfriadores (Desde adentro)" />
-							</div>
-							<div className={classes.row}>
-								<Camera name="Foto de LATERAL EXTERIOR" />
 							</div>
 						</div>
 					</ExpansionPanelDetails>

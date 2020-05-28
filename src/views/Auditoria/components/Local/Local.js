@@ -80,10 +80,10 @@ const Local = (props) => {
 	const { className, ...rest } = props;
 	const classes = useStyles();
 
-	const [ value, setValue ] = useState({});
+	const [value, setValue] = useState({});
 
 	const { empresa } = useContext(UserContext);
-	const [ establecimientos, setEstablecimientos ] = useState([]);
+	const [establecimientos, setEstablecimientos] = useState([]);
 	const {
 		nombreEstab,
 		setNombreEstab,
@@ -301,7 +301,6 @@ const Local = (props) => {
 								margin="normal"
 								label="Fecha de visita"
 								value={fechaVisita}
-								disabled
 							/>
 						</MuiPickersUtilsProvider>
 					</div>
