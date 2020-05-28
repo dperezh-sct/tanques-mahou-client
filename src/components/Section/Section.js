@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
+  root: { width: '100%' },
   overrides: {
     // Style sheet name ⚛️
     MuiTypography: {
@@ -39,14 +40,12 @@ const Section = ({ children, title }) => {
   const classes = useStyles()
 
   return (
-    <div className={classes.root}>
-      <Card className={classes.root}>
-        <CardHeader className={classes.header} title={title} />
-        <CardContent>
-          {children}
-        </CardContent>
-      </Card>
-    </div>
+    <Card className={classes.root}>
+      <CardHeader className={classes.header} title={title} />
+      <CardContent>
+        {children}
+      </CardContent>
+    </Card>
   );
 };
 

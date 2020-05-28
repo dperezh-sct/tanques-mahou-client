@@ -7,11 +7,13 @@ import StepButton from '@material-ui/core/StepButton';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Local from '../Local';
-import Establecimiento from '../Establecimiento';
+import Estacionamiento from '../Estacionamiento';
+import Tanques from '../Tanques';
+import Despacho from '../Despacho';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        width: '100%',
+        maxWidth: '350px',
     },
     button: {
         marginRight: theme.spacing(1),
@@ -25,11 +27,26 @@ const useStyles = makeStyles(theme => ({
     },
     step: {
         maxWidth: '200px'
+    },
+    sectionContainerBox: {
+        minWidth: '100%'
+    },
+    buttonsBox: {
+        minWidth: '100%',
+        margin: '18px 0px',
+        display: 'flex',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
+    saveMessage: {
+        width: '100%',
+        textAlign: 'center'
     }
 }));
 
 function getSteps() {
-    return ['Datos local', 'Establecimiento'];
+    return ['Datos local', 'Estacio- namiento', 'Tanques', 'Despacho'];
 }
 
 function getStepContent(step) {
@@ -37,11 +54,25 @@ function getStepContent(step) {
         case 0:
             return <Local />;
         case 1:
-            return <Establecimiento />;
+            return <Estacionamiento />;
         case 2:
-            return 'Tanques';
+            return <Tanques />;
         case 3:
-            return 'Despacho';
+            return <Despacho />;
+        default:
+            return 'Unknown step';
+    }
+}
+function getStepName(step) {
+    switch (step) {
+        case 0:
+            return 'local';
+        case 1:
+            return 'estacionamiento';
+        case 2:
+            return 'tanques';
+        case 3:
+            return 'despacho';
         default:
             return 'Unknown step';
     }
@@ -102,7 +133,7 @@ export default function HorizontalNonLinearStepper() {
 
     return (
         <div className={classes.root}>
-            <Stepper nonLinear activeStep={activeStep}>
+            <Stepper alternativeLabel nonLinear activeStep={activeStep}>
                 {steps.map((label, index) => (
                     <Step key={label}>
                         <StepButton
@@ -114,18 +145,20 @@ export default function HorizontalNonLinearStepper() {
                     </Step>
                 ))}
             </Stepper>
-            <div>
+            <div className={classes.sectionContainer}>
                 {allStepsCompleted() ? (
                     <div>
-                        <Redirect to='/' />
+                        <Redirect to='/auditorias' />
                     </div>
                 ) : (
-                        <div>
-                            <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography>
-                            <div>
+                        <div className={classes.sectionContainer}>
+                            <div className={classes.instructions}>
+                                {getStepContent(activeStep)}
+                            </div>
+                            <div className={classes.buttonsBox}>
                                 <Button disabled={activeStep === 0} onClick={handleBack} className={classes.button}>
                                     Atrás
-              </Button>
+                                </Button>
                                 <Button
                                     variant="contained"
                                     color="primary"
@@ -133,17 +166,26 @@ export default function HorizontalNonLinearStepper() {
                                     className={classes.button}
                                 >
                                     Siguiente
-              </Button>
+                                </Button>
+
                                 {activeStep !== steps.length &&
                                     (completed[activeStep] ? (
-                                        <Typography variant="caption" className={classes.completed}>
-                                            Sección {activeStep + 1} enviada
+                                        <div>
+                                            <Typography variant="caption" className={classes.completed}>
+                                                Sección de {getStepName(activeStep)} enviada
                                         </Typography>
-                                    ) : (
-                                            <Button variant="contained" color="primary" onClick={handleComplete}>
-                                                {completedSteps() === totalSteps() - 1 ? 'Completar' : 'Enviar paso '}
+                                            <Button variant="contained" color="primary" disabled>
+                                                Enviar paso
                                             </Button>
+                                        </div>
+                                    ) : (
+                                            <div>
+                                                <Button variant="contained" color="primary" onClick={handleComplete}>
+                                                    {completedSteps() === totalSteps() - 1 ? 'Completar' : 'Enviar paso '}
+                                                </Button>
+                                            </div>
                                         ))}
+
                             </div>
                         </div>
                     )}

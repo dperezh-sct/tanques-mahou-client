@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import Section from '../../components/Section';
+import { logOut } from '../../services/api';
+import { Redirect } from 'react-router-dom';
+import { AuthContext } from '../../contexts/AuthContext';
 import {
+  Grid,
   CircularProgress
 } from '@material-ui/core';
 
@@ -21,13 +24,32 @@ const useStyles = makeStyles(theme => ({
 const Logout = props => {
   /**STYLES */
   const { className, ...rest } = props
-  const classes = useStyles()
+  const { isAuth, setIsAuth } = useContext(AuthContext);
+
+  const classes = useStyles();
+  useEffect(() => {
+    logOut();
+    setIsAuth(false);
+    localStorage.clear();
+  }, []);
 
   return (
-    <div className={classes.root}>
-      <CircularProgress disableShrink />
+    <div >
+      <Grid
+        container
+      >
+        <Grid
+          item
+          lg={12}
+          xs={12}
+        >
+          <CircularProgress />
+          <Redirect to='/' />
+        </Grid>
+      </Grid>
     </div>
   );
+
 };
 
 Logout.propTypes = {
